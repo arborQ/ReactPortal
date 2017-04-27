@@ -92,6 +92,11 @@ module.exports = {
       minChunks: Infinity
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.LoaderOptionsPlugin({
+    //     minimize: true,
+    //     debug: false
+    // }),
+    // new webpack.optimize.UglifyJsPlugin({ output: {comments: false} }),
     new ExtractTextPlugin({
       filename: 'styles.css',
       disable: !isProduction
