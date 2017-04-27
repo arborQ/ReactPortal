@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+.vscode
+.DS_STORE
+node_modules
+.module-cache
+*.log*
+build
+dist
+=======
 # Logs
 logs
 *.log
@@ -35,3 +44,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+>>>>>>> d9fd57659c511ed5c221b3bb9423a406f6ad58ed
