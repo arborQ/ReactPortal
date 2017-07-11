@@ -1,11 +1,9 @@
 {
-  "name": "typescript-react-redux-boilerplate",
-  "version": "1.0.0",
+  "name": "react-portal-business",
+  "version": "0.0.1",
   "private": true,
-  "description": "A frontend boilerplate with React, Redux and Typescript",
-  "main": "index.js",
+  "description": "A frontend business portal with React, Redux and Typescript",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/dev.server.js",
     "build": "webpack -p --progress --colors"
   },
@@ -20,6 +18,7 @@
     "@types/react-router": "^4.0.4",
     "@types/react-router-dom": "^4.0.4",
     "@types/redux-actions": "^1.2.4",
+    "@types/systemjs": "^0.20.2",
     "@types/webpack": "^2.2.15",
     "@types/webpack-env": "^1.13.0",
     "awesome-typescript-loader": "^3.1.2",
@@ -38,6 +37,7 @@
     "react-hot-loader": "^1.3.1",
     "react-router-dom": "^4.1.1",
     "style-loader": "^0.16.1",
+    "systemjs": "^0.20.15",
     "typescript": "^2.3.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",

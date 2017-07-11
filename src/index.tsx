@@ -7,7 +7,7 @@ import Home from './containers/home';
 import { BrowserRouter } from 'react-router-dom';
 
 const history = createBrowserHistory();
-console.log('BrowserRouter', BrowserRouter);
+
 ReactDOM.render(
   <BrowserRouter>
     <Home />
