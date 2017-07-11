@@ -3,12 +3,17 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { IAuthorizeLoginState } from './store';
 
-interface ILoginProps extends RouteComponentProps<any> {
+interface ILoginDataProps {
     login: string;
     password: string;
+}
 
+interface ILoginActionProps {
     changeLogin(login: string): void;
     changePassword(password: string): void;
+}
+
+interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
 
 @connect((a, b) => {
@@ -29,12 +34,20 @@ interface ILoginProps extends RouteComponentProps<any> {
         }
     }
 )
-export default class LoginContainer extends React.Component<ILoginProps, {}> {
+export default class LoginContainer extends React.Component<ILoginProps, ILoginDataProps> {
+    constructor() {
+        super();
+        this.state = { login: '', password: '' };
+    }
+    componentDidMount() {
+        this.setState(Object.assign({}, this.state, { login: this.props.login, password: this.props.password }))
+    }
+
     render() {
         return (
             <div>
-                <input type="text" value={this.props.login} onChange={e => { this.props.changeLogin(e.target.value) }} />
-                <input type="password" value={this.props.password} onChange={e => { this.props.changePassword(e.target.value) }} />
+                <input type="text" value={this.state.login} onChange={e => { this.props.changeLogin(e.target.value) }} />
+                <input type="password" value={this.state.password} onChange={e => { this.props.changePassword(e.target.value) }} />
             </div>
         );
     }
