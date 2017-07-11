@@ -20,7 +20,7 @@ function loadComponent(getComponent?: () => Promise<any>): any {
                 return <div>Loading component...</div>;
             }
 
-            return <this.state.component />;
+            return <this.state.component {...this.props} />;
         }
     }
 }
