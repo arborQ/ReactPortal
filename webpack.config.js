@@ -19,7 +19,8 @@ module.exports = {
       'react-dom',
       'react-redux',
       'react-router',
-      'redux'
+      'redux',
+      'styled-components'
     ]
   },
   output: {
@@ -34,7 +35,10 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx'],
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // https://github.com/Microsoft/TypeScript/issues/11677
-    mainFields: ['main']
+    mainFields: ['main'],
+    alias : {
+      'bx-ui' : path.resolve(__dirname, './src/ui/material'),
+    }
   },
   module: {
     loaders: [

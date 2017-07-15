@@ -13,6 +13,10 @@
     "removeComments": true,
     "strictNullChecks": false,
     "outDir": "build",
+    "baseUrl": "./",
+    "paths": {
+      "bx-ui" : [ "./src/ui/material/index.ts" ]
+    },
     "lib": [
       "es6",
       "es7",

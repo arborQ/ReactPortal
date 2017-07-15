@@ -3,6 +3,8 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { IAuthorizeLoginState } from './store';
 
+import { InputComponent, ButtonComponent } from 'bx-ui';
+
 interface ILoginDataProps {
     login: string;
     password: string;
@@ -43,11 +45,16 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginD
         this.setState(Object.assign({}, this.state, { login: this.props.login, password: this.props.password }))
     }
 
+    updateState(state: any) {
+        this.setState(Object.assign({}, this.state, state));
+    }
+
     render() {
         return (
             <div>
-                <input type="text" value={this.state.login} onChange={e => { this.props.changeLogin(e.target.value) }} />
-                <input type="password" value={this.state.password} onChange={e => { this.props.changePassword(e.target.value) }} />
+                <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
+                <InputComponent value={this.state.password} label="Password" change={password => { this.updateState({ password }) }} />
+                <ButtonComponent label="Save" />
             </div>
         );
     }
