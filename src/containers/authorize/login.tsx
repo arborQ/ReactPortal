@@ -51,7 +51,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginD
 
     render() {
         return (
-            <div>
+            <div style={ { margin: '0 auto', maxWidth: "500px" } }>
                 <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
                 <InputComponent value={this.state.password} label="Password" change={password => { this.updateState({ password }) }} />
                 <ButtonComponent label="Save" />
