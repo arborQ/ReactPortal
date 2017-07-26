@@ -65,7 +65,7 @@ export default class ButtonComponent extends React.Component<{ label: string, cl
 
   render() {
       return (
-        <Button type="submit" disabled={ this.state.working } onClick={this.buttonClicked.bind(this)}>
+        <Button type={!!this.props.click ? "button" : "submit" } disabled={ this.state.working } onClick={this.buttonClicked.bind(this)}>
             <span>{this.props.label}</span>
         </Button>
       );
