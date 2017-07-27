@@ -4,8 +4,8 @@ export default {
         family: 'Montserrat'
     },
     colors: {
-        main: '#A5D1CB',
-        second: '#666448',
+        main: '#0E69BF',
+        second: '#7AB800',
         dark: '#332B1E',
         light: '#BEE8F4'
     }
