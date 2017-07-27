@@ -58,7 +58,7 @@ export const Label = styled.label`
     transition: 0.2s linear;
 
     :after {
-      background-color: #3f51b5;
+      background-color: ${styles.colors.main};
       bottom: 20px;
       content: '';
       height: 2px;

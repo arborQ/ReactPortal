@@ -38,6 +38,7 @@ module.exports = {
     mainFields: ['main'],
     alias : {
       'bx-ui' : path.resolve(__dirname, './src/ui/material'),
+      "bx-utils" : path.resolve(__dirname, './src/utils')
     }
   },
   module: {

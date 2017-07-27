@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LoadingComponent from '../loader';
 
 interface IFormProps extends React.HTMLProps<any> {
   submit: () => Promise<any> | void;
@@ -19,13 +20,15 @@ export default class FormComponent extends React.Component<IFormProps , { isLoad
 
     Promise.resolve(this.props.submit()).then(() => {
       this.setState(Object.assign({}, this.state, { isLoading: false }));
+    }).catch(() => {
+      this.setState(Object.assign({}, this.state, { isLoading: false }));
     });
   }
 
   render() {
       return (
       <form onSubmit={this.submitAction.bind(this)}>
-        { this.state.isLoading ? <div>{ this.props.loadingMessage ? this.props.loadingMessage: "Loading..." }</div> : this.props.children }
+        { this.state.isLoading ? <div>{ this.props.loadingMessage ? this.props.loadingMessage: <LoadingComponent></LoadingComponent> }</div> : this.props.children }
       </form>);
   }
 }

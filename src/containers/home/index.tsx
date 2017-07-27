@@ -1,29 +1,8 @@
 import * as React from 'react';
 import { Router, Route, Switch, RouteComponentProps } from 'react-router';
 import Header from './header';
-
-function loadComponent(getComponent?: () => Promise<any>): any {
-    return  class AsyncComponent extends React.Component<any, { component: any }> {
-
-        constructor() {
-            super();
-            this.state = { component: null };
-        }
-        componentWillMount () {
-            getComponent().then(component => {
-                this.setState({ component });
-            });
-        }
-
-        render() {
-            if(!this.state.component) {
-                return <div>Loading component...</div>;
-            }
-
-            return <this.state.component {...this.props} />;
-        }
-    }
-}
+import { LoadingComponent } from 'bx-ui';
+import { AsyncComponent } from 'bx-utils';
 
 export default class HomeContainer extends React.Component<any, {}> {
     render() {
@@ -32,8 +11,8 @@ export default class HomeContainer extends React.Component<any, {}> {
             <Header/>
             <div>
                 <Switch>
-                    <Route exact path='/' component={loadComponent(() => System.import('./home.component').then(module => module.default))}/>
-                    <Route path='/authorize' component={loadComponent(() => System.import('../authorize').then(module => module.default))}/>
+                    <Route exact path='/' component={AsyncComponent(() => System.import('./home.component').then(module => module.default))}/>
+                    <Route path='/authorize' component={AsyncComponent(() => System.import('../authorize').then(module => module.default))}/>
                 </Switch>
             </div>
         </div>

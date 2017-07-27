@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { IAuthorizeLoginState } from './store';
-
+import { ajax } from 'bx-utils';
 import { InputComponent, ButtonComponent, CardComponent, FormComponent} from 'bx-ui';
 
 interface ILoginDataProps {
@@ -20,6 +20,7 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 
 @connect((a, b) => {
     let { login } = a;
+
     return {
         login: login.login,
         password: login.password
@@ -49,10 +50,14 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginD
         this.setState(Object.assign({}, this.state, state));
     }
 
+    submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
+        return ajax.post("/api/authentication/login", { login: this.state.login, password: this.state.password });
+    }
+
     render() {
         return (
             <CardComponent style={ { margin: '0 auto', maxWidth: "500px" } }>
-                <FormComponent submit={() => new Promise((r) => { setTimeout(() => { r(); }, 1000) })}>
+                <FormComponent submit={this.submit.bind(this)}>
                     <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
                     <InputComponent value={this.state.password} isPassword={true} label="Password" change={password => { this.updateState({ password }) }} />
                     <ButtonComponent label="Save" />

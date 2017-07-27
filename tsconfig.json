@@ -15,7 +15,8 @@
     "outDir": "build",
     "baseUrl": "./",
     "paths": {
-      "bx-ui" : [ "./src/ui/material/index.ts" ]
+      "bx-ui" : [ "./src/ui/material/index.ts" ],
+      "bx-utils" : [ "./src/utils/index.ts" ]
     },
     "lib": [
       "es6",
