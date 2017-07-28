@@ -23,6 +23,7 @@ var headerComponent: React.StatelessComponent<any> = (p: any) => {
     return (<Header>
         <Link to={'/'}>Home</Link>
         <Link to={'/authorize/login'}>Login</Link>
+        <Link to={'/users/list'}>Users</Link>
     </Header>);
 };
 
