@@ -8,12 +8,11 @@ export const Input = styled.input`
     font-size: ${styles.font.size}px;
     font-family: ${styles.font.family},sans-serif;
     margin: 0;
-    padding: 4px 0;
+    padding: 8px 5px;
     width: 100%;
     background: 0 0;
     text-align: left;
-    color: inherit;
-
+    
     :focus {
       outline: none;
     }

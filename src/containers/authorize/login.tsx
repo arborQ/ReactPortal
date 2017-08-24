@@ -60,7 +60,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
 
     render() {
         return (
-            <CardComponent style={ { margin: '0 auto', maxWidth: "500px" } }>
+            <CardComponent size={400}>
                 <FormComponent submit={this.submit.bind(this)}>
                     <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
                     <InputComponent value={this.state.password} isPassword={true} label="Password" change={password => { this.updateState({ password }) }} />
