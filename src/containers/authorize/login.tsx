@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Router, RouterProps } from 'react-router';
 import { connect } from 'react-redux';
 import { IAuthorizeLoginState } from './store';
 import { ajax } from 'bx-utils';
@@ -7,12 +7,15 @@ import { InputComponent, ButtonComponent, CardComponent, FormComponent} from 'bx
 
 interface ILoginDataProps {
     login: string;
+}
+
+interface ILoginState {
+    login: string;
     password: string;
 }
 
 interface ILoginActionProps {
     changeLogin(login: string): void;
-    changePassword(password: string): void;
 }
 
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
@@ -23,27 +26,23 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 
     return {
         login: login.login,
-        password: login.password
     };
 },
     dispach => {
         return {
             changeLogin(login: string) {
                 dispach({ type: 'change_login', login });
-            },
-            changePassword(password: string) {
-                dispach({ type: 'change_password', password });
             }
         }
     }
 )
-export default class LoginContainer extends React.Component<ILoginProps, ILoginDataProps> {
+export default class LoginContainer extends React.Component<ILoginProps, ILoginState> {
     constructor() {
         super();
         this.state = { login: '', password: '' };
     }
     componentDidMount() {
-        this.setState(Object.assign({}, this.state, { login: this.props.login, password: this.props.password }))
+        this.setState(Object.assign({}, this.state, { login: this.props.login, password: '' }));
     }
 
     updateState(state: any) {
@@ -51,7 +50,12 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginD
     }
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-        return ajax.post("/api/authentication/login", { login: this.state.login, password: this.state.password });
+        return ajax
+        .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
+        .then((res: any) => {
+            this.props.changeLogin(res.user);
+            this.props.history.push('/users/list');
+        });
     }
 
     render() {

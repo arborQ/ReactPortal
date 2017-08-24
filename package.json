@@ -5,6 +5,7 @@
   "description": "A frontend business portal with React, Redux and Typescript",
   "scripts": {
     "start": "node ./bin/dev.server.js",
+    "mock": "node ./bin/mock.server.js",
     "build": "webpack -p --progress --colors"
   },
   "license": "MIT",
@@ -14,6 +15,7 @@
     "@types/node": "^7.0.13",
     "@types/react": "^15.0.22",
     "@types/react-dom": "^0.14.23",
+    "@types/react-hot-loader": "^3.0.3",
     "@types/react-redux": "^4.4.39",
     "@types/react-router": "^4.0.4",
     "@types/react-router-dom": "^4.0.4",
@@ -47,6 +49,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "express": "^4.15.4",
+    "mdbootstrap": "^4.4.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",

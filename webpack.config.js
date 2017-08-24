@@ -14,13 +14,15 @@ module.exports = {
   context: sourcePath,
   entry: {
     main: './index.tsx',
+    
     vendor: [
       'react',
       'react-dom',
       'react-redux',
       'react-router',
       'redux',
-      'styled-components'
+      'styled-components',
+      'react-hot-loader'
     ]
   },
   output: {
