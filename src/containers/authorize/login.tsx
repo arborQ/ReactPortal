@@ -23,7 +23,6 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 
 @connect((a, b) => {
     let { login } = a;
-
     return {
         login: login.login,
     };
@@ -41,8 +40,13 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
         super();
         this.state = { login: '', password: '' };
     }
+    
     componentDidMount() {
-        this.setState(Object.assign({}, this.state, { login: this.props.login, password: '' }));
+        if (!!this.props.login) {
+            this.props.history.push('/users/list');
+        } else {
+            this.setState(Object.assign({}, this.state, { login: this.props.login || '', password: '' }));
+        }
     }
 
     updateState(state: any) {
