@@ -4,14 +4,12 @@ import { Provider } from 'react-redux';
 import LoginContainer from './login';
 import ChangePasswordContainer from './changepassword';
 import store from './store';
-
 import { LoginUrl, ChangePasswordUrl } from './index';
 
 export default class AuthorizeContainer extends React.Component<RouteComponentProps<any>, {}> {
     render() {
         return (
             <div>
-                <div>Authorize</div>
                 <div>
                     <Provider store={store}>
                         <Switch>

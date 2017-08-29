@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { HeaderComponent } from 'bx-ui';
 
 export default class HomeContainer extends React.Component<RouteComponentProps<any>, void> {
     render() {
         return (
-        <div>
+        <HeaderComponent>
             You are on home page
-        </div>
+        </HeaderComponent>
         )
     }
 }

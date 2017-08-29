@@ -18,7 +18,7 @@ export default function asyncComponent(getComponent?: () => Promise<any>): any {
             if(!this.state.component) {
                 return <LoadingComponent></LoadingComponent>;
             }
-            console.log('async props', this.props);
+            
             return <this.state.component {...this.props} />;
         }
     }

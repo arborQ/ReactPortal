@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { Router, Route, Switch, RouteComponentProps } from 'react-router';
+import { Router, Route, Switch, RouteComponentProps, withRouter } from 'react-router';
 import Header from './header';
 import { LoadingComponent } from 'bx-ui';
 import { AsyncComponent } from 'bx-utils';
 
 import { AuthorizeComponent, AuthorizeUrl } from '../authorize'
 
-export default class HomeContainer extends React.Component<any, {}> {
+class HomeContainer extends React.Component<any, {}> {
     render() {
         return (
         <div>
-            <Header/>
+            <Header {...this.props}/>
             <div>
                 <Switch>
                     <Route exact path='/' component={AsyncComponent(() => System.import('./home.component').then(module => module.default))}/>
@@ -22,3 +22,5 @@ export default class HomeContainer extends React.Component<any, {}> {
         )
     }
 }
+
+export default withRouter(HomeContainer);

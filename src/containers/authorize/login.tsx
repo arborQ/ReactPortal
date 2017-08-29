@@ -3,7 +3,7 @@ import { RouteComponentProps, Router, RouterProps } from 'react-router';
 import { connect } from 'react-redux';
 import { IAuthorizeLoginState } from './store';
 import { ajax } from 'bx-utils';
-import { InputComponent, ButtonComponent, CardComponent, FormComponent} from 'bx-ui';
+import { InputComponent, ButtonComponent, CardComponent, FormComponent, HeaderComponent } from 'bx-ui';
 
 interface ILoginDataProps {
     login: string;
@@ -40,7 +40,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
         super();
         this.state = { login: '', password: '' };
     }
-    
+
     componentDidMount() {
         if (!!this.props.login) {
             this.props.history.push('/users/list');
@@ -65,6 +65,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
     render() {
         return (
             <CardComponent size={400}>
+                <HeaderComponent>Log in</HeaderComponent>
                 <FormComponent submit={this.submit.bind(this)}>
                     <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
                     <InputComponent value={this.state.password} isPassword={true} label="Password" change={password => { this.updateState({ password }) }} />

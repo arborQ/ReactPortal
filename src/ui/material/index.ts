@@ -4,6 +4,8 @@ import CardComponent from './card';
 import FormComponent from './form';
 import GridComponent from './grid';
 import LoadingComponent from './loader';
+import HeaderComponent from './header';
+
 import Styles from './styles';
 
 export {
@@ -13,5 +15,6 @@ export {
     FormComponent,
     LoadingComponent,
     GridComponent,
+    HeaderComponent,
     Styles,
 };
