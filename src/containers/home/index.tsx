@@ -6,7 +6,7 @@ import { AsyncComponent } from 'bx-utils';
 
 import { AuthorizeComponent, AuthorizeUrl } from '../authorize'
 
-class HomeContainer extends React.Component<any, {}> {
+class HomeContainer extends React.Component<RouteComponentProps<any>, {}> {
     render() {
         return (
         <div>

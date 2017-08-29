@@ -19,24 +19,26 @@ var Header = styled.header`
         padding: 0 10px;
         text-decoration: none;
         color: ${Styles.colors.second};
+
+        &.active {
+            color : #FFF;
+        }
     }
 `;
 
-interface ILinkProps {
-
-}
-
-var linkComponent: React.StatelessComponent<RouteComponentProps<ILinkProps>> = (p: RouteComponentProps<ILinkProps>) => {
-    return <Link to={'/'}></Link>;
- }
-
 var headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: RouteComponentProps<any>) => {
-    console.log(p);
-    return (<Header>
-        <Link to={'/'}>Home</Link>
-        <Link to={LoginUrl}>Login</Link>
-        <Link to={ChangePasswordUrl}>Change password</Link>
-        <Link to={'/users/list'}>Users</Link>
+    var { pathname } = p.location;
+
+    const paths = [
+        { path: '/', label: 'Home' },
+        { path: LoginUrl, label: 'Login' },
+        { path: ChangePasswordUrl, label: 'Change password' },
+        { path: '/users/list', label: 'Users' },
+    ];
+
+    return (
+    <Header>
+        { paths.map(p => <Link className={ pathname === p.path ? "active" : "" } key={ p.path } to={ p.path }>{ p.label }</Link> ) }
     </Header>);
 };
 
