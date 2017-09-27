@@ -22,7 +22,6 @@ module.exports = {
       'react-router',
       'redux',
       'styled-components',
-      'react-hot-loader'
     ]
   },
   output: {
@@ -51,7 +50,6 @@ module.exports = {
         use: isProduction
           ? 'awesome-typescript-loader?module=es6'
           : [
-            'react-hot-loader',
             'awesome-typescript-loader'
           ]
       },
@@ -121,7 +119,6 @@ module.exports = {
   ],
   devServer: {
     contentBase: sourcePath,
-    hot: true,
     stats: {
       warnings: false
     },
