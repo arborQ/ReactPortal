@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { RouteComponentProps, Router, RouterProps } from 'react-router';
-import { connect } from 'react-redux';
-import { IAuthorizeLoginState } from './store';
-import { ajax } from 'bx-utils';
-import { InputComponent, ButtonComponent, CardComponent, FormComponent, HeaderComponent } from 'bx-ui';
+import { ajax } from "bx-utils";
+import { ButtonComponent, CardComponent, FormComponent, HeaderComponent, InputComponent } from "bx-ui";
+import { connect } from "react-redux";
+import * as React from "react";
+import { RouteComponentProps, Router, RouterProps } from "react-router";
 
 interface ILoginDataProps {
     login: string;
@@ -22,7 +21,7 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 }
 
 @connect((a, b) => {
-    let { login } = a;
+    const { login } = a;
     return {
         login: login.login,
     };
@@ -30,7 +29,7 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
     dispach => {
         return {
             changeLogin(login: string) {
-                dispach({ type: 'change_login', login });
+                dispach({ type: "change_login", login });
             }
         }
     }
@@ -38,14 +37,14 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 export default class LoginContainer extends React.Component<ILoginProps, ILoginState> {
     constructor() {
         super();
-        this.state = { login: '', password: '' };
+        this.state = { login: "", password: "" };
     }
 
     componentDidMount() {
         if (!!this.props.login) {
-            this.props.history.push('/users/list');
+            this.props.history.push("/users/list");
         } else {
-            this.setState(Object.assign({}, this.state, { login: this.props.login || '', password: '' }));
+            this.setState(Object.assign({}, this.state, { login: this.props.login || "", password: "" }));
         }
     }
 
@@ -58,7 +57,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
         .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
         .then((res: any) => {
             this.props.changeLogin(res.user);
-            this.props.history.push('/users/list');
+            this.props.history.push("/users/list");
         });
     }
 
