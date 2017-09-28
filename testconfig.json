@@ -3,5 +3,9 @@
     "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
         "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-      }
+    },
+    "moduleNameMapper" : {
+        "bx-utils": "<rootDir>/src/utils/index.ts",
+        "bx-ui" : "<rootDir>/src/ui/material/index.ts"
+    }
 }

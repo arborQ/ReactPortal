@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import styled from 'styled-components';
-import { Styles } from 'bx-ui';
+import { Styles } from "bx-ui";
+import * as React from "react";
+import { RouteComponentProps } from "react-router";
+import styled from "styled-components";
 
-import { LoginUrl, ChangePasswordUrl } from '../authorize';
-import { NavLink, Link} from 'react-router-dom';
+import { Link, NavLink} from "react-router-dom";
+import { ChangePasswordUrl, LoginUrl } from "../authorize";
 
-var Header = styled.header`
+const Header = styled.header`
     background-color: ${Styles.colors.main};
     width: 100%;
     height: 50px;
@@ -26,19 +26,26 @@ var Header = styled.header`
     }
 `;
 
-var headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: RouteComponentProps<any>) => {
-    var { pathname } = p.location;
+const headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: RouteComponentProps<any>) => {
+    const { pathname } = p.location;
 
     const paths = [
-        { path: '/', label: 'Home' },
-        { path: LoginUrl, label: 'Login' },
-        { path: ChangePasswordUrl, label: 'Change password' },
-        { path: '/users/list', label: 'Users' },
+        { path: "/", label: "Home" },
+        { path: LoginUrl, label: "Login" },
+        { path: ChangePasswordUrl, label: "Change password" },
+        { path: "/users/list", label: "Users" },
     ];
 
     return (
     <Header>
-        { paths.map(p => <Link className={ pathname === p.path ? "active" : "" } key={ p.path } to={ p.path }>{ p.label }</Link> ) }
+        { paths
+            .map(p =>
+            <Link
+                className={ pathname === p.path ? "active" : "" }
+                key={ p.path }
+                to={ p.path }>
+                    { p.label }
+            </Link> ) }
     </Header>);
 };
 

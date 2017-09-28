@@ -7,7 +7,7 @@
     "start": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
     "build": "webpack -p --progress --colors",
-    "test": "jest --notify --config=testconfig.json",
+    "test": "cls && jest --notify --config=testconfig.json",
     "validate": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "license": "MIT",
