@@ -20,20 +20,3 @@ test("button sets label", () => {
             expect(buttonSpan.text()).toEqual(label.trim());
         });
 });
-
-test("button disable when click returns promise", async () => {
-    const buttonComponent = shallow(<Button label={"label"} click={() => buttonActionPromise} />);
-
-    const buttonActionPromise = new Promise<any>((resolve) => {
-
-        expect(buttonComponent.props().disabled).toEqual(false);
-        buttonComponent.simulate("click");
-        expect(buttonComponent.props().disabled).toEqual(true);
-
-        resolve(1);
-    });
-
-    await expect(buttonActionPromise).resolves.toEqual(1);
-
-    expect(buttonComponent.props().disabled).toEqual(false);
-});
