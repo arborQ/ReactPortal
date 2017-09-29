@@ -1,8 +1,17 @@
+import {
+    ButtonComponent,
+    CardComponent,
+    FormComponent,
+    HeaderComponent,
+    InputComponent,
+    Interfaces as UI
+} from "bx-ui";
 import { ajax } from "bx-utils";
-import { ButtonComponent, CardComponent, FormComponent, HeaderComponent, InputComponent } from "bx-ui";
-import { connect } from "react-redux";
+import { Validator } from "bx-utils";
 import * as React from "react";
+import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
+import { IAuthorizeStoreState } from "./store";
 
 interface ILoginDataProps {
     login: string;
@@ -20,19 +29,19 @@ interface ILoginActionProps {
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
 
-@connect((a, b) => {
-    const { login } = a;
+@connect((store: IAuthorizeStoreState, b) => {
+    const { user } = store;
     return {
-        login: login.login,
+        login: user.login,
     };
 },
-    dispach => {
+    (dispach: any) => {
         return {
             changeLogin(login: string) {
                 dispach({ type: "change_login", login });
-            }
-        }
-    }
+            },
+        };
+    },
 )
 export default class LoginContainer extends React.Component<ILoginProps, ILoginState> {
     constructor() {
@@ -54,20 +63,38 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
         return ajax
-        .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
-        .then((res: any) => {
-            this.props.changeLogin(res.user);
-            this.props.history.push("/users/list");
-        });
+            .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
+            .then((res: any) => {
+                this.props.changeLogin(res.user);
+                this.props.history.push("/users/list");
+            });
     }
 
     render() {
+
+        const inputs: UI.IInputProps[] = [
+            {
+                change: (login: string) => { this.updateState({ login }); },
+                label: "Login",
+                validator: Validator.StringRequired,
+                value: this.state.login,
+            },
+            {
+                change: (password: string) => { this.updateState({ password }); },
+                isPassword: true,
+                label: "Password",
+                validator: Validator.StringRequired,
+                value: this.state.password,
+            },
+        ];
+
         return (
             <CardComponent size={400}>
                 <HeaderComponent>Log in</HeaderComponent>
                 <FormComponent submit={this.submit.bind(this)}>
-                    <InputComponent value={this.state.login} label="Login" change={login => { this.updateState({ login }) }} />
-                    <InputComponent value={this.state.password} isPassword={true} label="Password" change={password => { this.updateState({ password }) }} />
+                    {
+                        inputs.map((input: UI.IInputProps, i: number) => <InputComponent key={i} {...input} />)
+                    }
                     <ButtonComponent label="Save" />
                 </FormComponent>
             </CardComponent>

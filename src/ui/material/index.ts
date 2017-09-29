@@ -1,12 +1,14 @@
-import InputComponent from './input/input';
-import ButtonComponent from './button/button';
-import CardComponent from './card';
-import FormComponent from './form';
-import GridComponent from './grid';
-import LoadingComponent from './loader';
-import HeaderComponent from './header';
+import ButtonComponent from "./button/button";
+import CardComponent from "./card";
+import FormComponent from "./form";
+import GridComponent from "./grid";
+import HeaderComponent from "./header";
+import InputComponent from "./input/input";
+import LoadingComponent from "./loader";
 
-import Styles from './styles';
+import * as Interfaces from "../ui.interfaces";
+
+import Styles from "./styles";
 
 export {
     InputComponent,
@@ -17,4 +19,5 @@ export {
     GridComponent,
     HeaderComponent,
     Styles,
+    Interfaces,
 };

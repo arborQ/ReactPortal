@@ -1,17 +1,25 @@
-import * as React from 'react';
-
-import { 
-  InputContainer,
+import * as React from "react";
+import { IInputProps } from "../../ui.interfaces";
+import {
   Input,
-  Label
-} from './input.style';
+  InputContainer,
+  Label,
+} from "./input.style";
 
+import { Validator } from "bx-utils";
 
-export default function InputComponent(props: { value: string, isPassword?: boolean, label: string, change: (value: string) => void }) {
-  return (
+export default class InputComponent extends React.Component<IInputProps, {}> {
+
+  render() {
+    return (
       <InputContainer>
-        <Input required type={ !!props.isPassword ? "password": "text" } value={props.value} onChange={e => props.change(e.target["value"])} />
-        <Label>{props.label}</Label>
+        <Input
+          required
+          type={!!this.props.isPassword ? "password" : "text"}
+          value={this.props.value}
+          onChange={(e: any) => this.props.change(e.target.value)} />
+        <Label>{this.props.label}</Label>
       </InputContainer>
-  );
+    );
+  }
 }
