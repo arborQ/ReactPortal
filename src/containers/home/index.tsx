@@ -13,9 +13,9 @@ class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> 
             <Header {...this.props}/>
             <div>
                 <Switch>
-                    <Route exact path='/' component={AsyncComponent(() => System.import('./home.component').then(module => module.default))}/>
+                    <Route exact path='/' component={AsyncComponent(() => System.import('./home.component').then((module) => module.default))}/>
                     <Route path={AuthorizeUrl} component={AuthorizeComponent}/>
-                    <Route path='/users' component={AsyncComponent(() => System.import('../users').then(module => module.default))}/>
+                    <Route path='/users' component={AsyncComponent(() => System.import('../users').then((module) => module.default))}/>
                 </Switch>
             </div>
         </div>
