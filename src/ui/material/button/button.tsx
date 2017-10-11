@@ -84,12 +84,18 @@ export default class ButtonComponent extends React.Component<IButtonProps, IButt
   }
 
   render() {
+    let displayLabel =  this.props.label.trim();
+
+    if (!displayLabel) {
+      displayLabel = "BUTTON";
+    }
+
     return (
       <Button
         type={!!this.props.click ? "button" : "submit"}
         disabled={this.state.working}
         onClick={this.buttonClicked.bind(this)}>
-          <span>{this.props.label.trim()}</span>
+          <span>{displayLabel}</span>
       </Button>
     );
   }

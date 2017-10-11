@@ -20,3 +20,18 @@ test("button sets label", () => {
             expect(buttonSpan.text()).toEqual(label.trim());
         });
 });
+
+test("button sets default button label", () => {
+    [" ", "  ", ""]
+    .forEach((label: string) => {
+
+        const buttonComponent = shallow(<Button label={label} />);
+
+        const buttonSpan = buttonComponent.find("span").first();
+
+        expect(buttonSpan).toBeDefined();
+        expect(buttonSpan).not.toBeNull();
+        expect(buttonSpan.text()).toEqual("BUTTON");
+        expect(buttonSpan.text()).not.toEqual(label);
+    });
+});
