@@ -72,18 +72,23 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
 
     render() {
 
+        const fieldValidator = new Validator.Combine([
+            new Validator.StringRequired(),
+            new Validator.StringLength(5),
+        ]);
+
         const inputs: UI.IInputProps[] = [
             {
                 change: (login: string) => { this.updateState({ login }); },
                 label: "Login",
-                validator: Validator.StringRequired,
+                validator: fieldValidator,
                 value: this.state.login,
             },
             {
                 change: (password: string) => { this.updateState({ password }); },
                 isPassword: true,
                 label: "Password",
-                validator: Validator.StringRequired,
+                validator: fieldValidator,
                 value: this.state.password,
             },
         ];

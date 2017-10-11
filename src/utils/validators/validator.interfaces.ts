@@ -3,7 +3,11 @@ export interface IValidationResult {
     messages?: string | string[];
 }
 
-export type IValidator<T> = (value: T) => Promise<IValidationResult>;
+// export type IValidator<T> = (value: T) => Promise<IValidationResult>;
+
+export interface IValidator<T> {
+    validate(model: T): Promise<IValidationResult>;
+}
 
 export class ValidationHelper {
     static SuccessValidation(): Promise<IValidationResult> {

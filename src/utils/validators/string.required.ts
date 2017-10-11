@@ -1,11 +1,11 @@
 import { IValidationResult, IValidator, ValidationHelper } from "./validator.interfaces";
 
-const requireValidator: IValidator<string> = (value: string): Promise<IValidationResult> => {
-    if (!value || value.length === 0) {
-        return ValidationHelper.FailValidation("Field is required.");
+export default class StringRequiredValidation implements IValidator<string> {
+    validate(value: string): Promise<IValidationResult> {
+        if (!value || value.length === 0) {
+            return ValidationHelper.FailValidation("Field is required.");
+        }
+
+        return ValidationHelper.SuccessValidation();
     }
-
-    return ValidationHelper.SuccessValidation();
-};
-
-export default requireValidator;
+}

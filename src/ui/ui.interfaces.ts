@@ -8,3 +8,9 @@ export interface IInputProps {
     delay?: number;
     validator?: Validator.ValidatorInterfaces.IValidator<string>;
 }
+
+export interface IInputState {
+    value: string;
+    isValid: boolean;
+    working: boolean;
+}
