@@ -13,4 +13,5 @@ export interface IInputState {
     value: string;
     isValid: boolean;
     working: boolean;
+    messages?: string[];
 }
