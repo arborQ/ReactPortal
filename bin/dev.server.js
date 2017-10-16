@@ -13,7 +13,7 @@ var server = new webpackDevServer(compiler, {
       "target": {
         "host": "localhost",
         "protocol": 'http',
-        "port": 5881
+        "port": 8011
       },
       secure: false
     }

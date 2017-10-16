@@ -11,3 +11,7 @@ export function post<T>(url: string, data: any): Promise<T> {
 
     return fetch(request).then((r: any) => r.json());
 }
+
+export function get<T>(url: string): Promise<T> {
+    return fetch(url).then((r: any) => r.json());
+}

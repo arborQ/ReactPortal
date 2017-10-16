@@ -1,5 +1,6 @@
 import { setTimeout } from "timers";
 import * as ajax from "./ajax";
+import ApiComponent from "./apiComponent";
 import Assign from "./assign";
 import AsyncComponent from "./asyncComponent";
 import Clone from "./clone";
@@ -20,6 +21,7 @@ function debounce(func: () => void, wait: number): () => void {
 export {
     ajax,
     Assign,
+    ApiComponent,
     AsyncComponent,
     Clone,
     Validator,
