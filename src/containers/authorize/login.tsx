@@ -74,7 +74,13 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
 
         const fieldValidator = new Validator.Combine([
             new Validator.StringRequired(),
-            new Validator.StringLength(5),
+            new Validator.StringLength(1, 50),
+        ]);
+
+        const matchValidator = new Validator.Combine([
+            new Validator.StringRequired(),
+            new Validator.StringLength(10),
+            new Validator.StringMatch(() => this.state.login),
         ]);
 
         const inputs: UI.IInputProps[] = [
@@ -88,7 +94,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
                 change: (password: string) => { this.updateState({ password }); },
                 isPassword: true,
                 label: "Password",
-                validator: fieldValidator,
+                validator: matchValidator,
                 value: this.state.password,
             },
         ];

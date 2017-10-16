@@ -1,6 +1,6 @@
 export interface IValidationResult {
     isValid: boolean;
-    messages?: string | string[];
+    messages?: string[];
 }
 
 // export type IValidator<T> = (value: T) => Promise<IValidationResult>;
@@ -15,6 +15,6 @@ export class ValidationHelper {
     }
 
     static FailValidation(messages: string | string[]): Promise<IValidationResult> {
-        return Promise.reject({ isValid: false, messages });
+        return Promise.reject({ isValid: false, messages: Array.isArray(messages) ? messages : [ messages ] });
     }
 }
