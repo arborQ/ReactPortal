@@ -1,3 +1,14 @@
+function handleAjax<T>(ajax: Promise<Response>): Promise<T>  {
+    return ajax
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok.");
+        }
+        return response;
+    })
+    .then((r: any) => r.json());
+}
+
 export function post<T>(url: string, data: any): Promise<T> {
 
     const request = new Request(url, {
@@ -9,9 +20,9 @@ export function post<T>(url: string, data: any): Promise<T> {
         method: "POST",
     });
 
-    return fetch(request).then((r: any) => r.json());
+    return handleAjax(fetch(request));
 }
 
 export function get<T>(url: string): Promise<T> {
-    return fetch(url).then((r: any) => r.json());
+    return handleAjax(fetch(url));
 }

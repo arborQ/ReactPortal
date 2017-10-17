@@ -1,30 +1,49 @@
 import { ajax } from "bx-utils";
 import * as React from "react";
 
-export default abstract class ApiComponent<P, S> extends React.Component<P, { loading: boolean, data: any }> {
-  constructor(private loadUrl: string) {
+export interface ILoadingProps<T> {
+  loadUrl: string;
+  content: (data: T) => JSX.Element;
+}
+
+export interface ILoadingState<T> {
+  loading: boolean;
+  error?: string;
+  data: T;
+}
+
+export default class ApiComponent<S>
+  extends React.Component<ILoadingProps<S>, ILoadingState<S>> {
+  constructor() {
     super();
-    this.state = { loading: true, data: null };
   }
 
   renderLoading() {
     return <div>Loading...</div>;
   }
 
-  abstract renderContent(data: any): JSX.Element;
+  renderCantFind(message?: string) {
+    return <div>Path doesn't exists</div>;
+  }
 
   render() {
     if (this.state.loading) {
       return this.renderLoading();
     }
 
-    return this.renderContent(this.state.data);
+    if (!!this.state.error) {
+      return this.renderCantFind();
+    }
+
+    return this.props.content(this.state.data);
   }
 
   componentWillMount() {
-    this.setState({ loading: true, data: null });
-    ajax.get(this.loadUrl).then((data) => {
+    this.setState({ loading: true, data: null, error: null });
+    ajax.get<S>(this.props.loadUrl).then((data) => {
       this.setState({ loading: false, data });
+    }).catch(() => {
+      this.setState({ loading: false, error: "404" });
     });
   }
 }
