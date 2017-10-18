@@ -41,14 +41,16 @@ export default class InputComponent extends React.Component<IInputProps, IInputS
 
   render() {
     return (
-      <InputContainer>
+      <InputContainer htmlFor={this.props.name}>
         <Input
+          name={this.props.name}
+          id={this.props.name}
           required
           type={!!this.props.isPassword ? "password" : "text"}
           value={this.state.value}
           onBlur={() => { this.setState(Object.assign(this.state, { value: this.props.value }));  }}
           onChange={(e: any) => this.updateParent(e.target.value)} />
-        <Label>{this.props.label}</Label>
+        <Label htmlFor={this.props.name}>{this.props.label}</Label>
         {
           !!this.state.messages && !!this.state.messages.length
           ? <ValidationMessage>{ this.state.messages.join() }</ValidationMessage>

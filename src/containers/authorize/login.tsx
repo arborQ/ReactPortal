@@ -87,6 +87,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
             {
                 change: (login: string) => { this.updateState({ login }); },
                 label: "Login",
+                name: "login",
                 validator: fieldValidator,
                 value: this.state.login,
             },
@@ -94,6 +95,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
                 change: (password: string) => { this.updateState({ password }); },
                 isPassword: true,
                 label: "Password",
+                name: "password",
                 validator: matchValidator,
                 value: this.state.password,
             },

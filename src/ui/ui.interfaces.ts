@@ -1,6 +1,7 @@
 import { Validator } from "bx-utils";
 
 export interface IInputProps {
+    name?: string;
     value: string;
     isPassword?: boolean;
     label: string;

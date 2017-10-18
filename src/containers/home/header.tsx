@@ -33,7 +33,7 @@ const headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: 
         { path: "/", label: "Home" },
         { path: LoginUrl, label: "Login" },
         { path: ChangePasswordUrl, label: "Change password" },
-        { path: "/users/list", label: "Users" },
+        { path: "/users", label: "Users" },
     ];
 
     return (

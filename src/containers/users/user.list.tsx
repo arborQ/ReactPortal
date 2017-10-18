@@ -8,7 +8,7 @@ export default class UserListComponent extends React.Component<any, any> {
       <ApiComponent
         loadUrl="/api/users"
         content={(data: any[]) =>
-          <GridComponent>{data.length}</GridComponent>
+        null
         } />);
   }
 }

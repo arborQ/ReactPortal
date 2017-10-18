@@ -1,6 +1,6 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import styles from '../styles';
+import * as React from "react";
+import styled from "styled-components";
+import styles from "../styles";
 
 let Grid = styled.table`
     position: relative;
@@ -37,7 +37,8 @@ let GridHeaderCell = styled.th`
     box-sizing: border-box;
     padding: 0 18px 12px 18px;
     text-align: center;
-`;
+    border-bottom: 2px solid #ececec;
+    `;
 
 let GridBody = styled.tbody`
     padding-bottom: 3px;
@@ -58,25 +59,33 @@ let GridCell = styled.td`
     text-align: center;
 `;
 
-export default class GridComponent extends React.Component<any, any> {
+export default class GridComponent extends React.Component<{ schema: any, model: any[] }, any> {
+
   render() {
+    const columns = [];
+
+    // tslint:disable-next-line:forin
+    for (const index in this.props.schema) {
+      columns.push(index);
+    }
+
     return (
       <Grid>
         <GridHeader>
           <GridRow>
-            <GridHeaderCell>Id</GridHeaderCell>
-            <GridHeaderCell>First name</GridHeaderCell>
-            <GridHeaderCell>Last name</GridHeaderCell>
+            {columns.map((c: string) => <GridHeaderCell key={c}>{c}</GridHeaderCell>)}
           </GridRow>
         </GridHeader>
         <GridBody>
-          <GridRow>
-            <GridCell>Id</GridCell>
-            <GridCell>First name</GridCell>
-            <GridCell>Last name</GridCell>
-          </GridRow>
+          {
+            this.props.model.length === 0
+              ? <GridRow><GridCell colSpan={columns.length}>No items</GridCell></GridRow>
+              : <GridRow><GridCell colSpan={columns.length}>
+                {`Items: ${this.props.model.length}`}
+              </GridCell></GridRow>
+          }
         </GridBody>
       </Grid>
-    )
+    );
   }
 }

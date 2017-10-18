@@ -9,7 +9,8 @@
     "build": "webpack -p --progress --colors",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
-    "validate": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+    "validate": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "cypress": "cypress open"
   },
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +32,7 @@
     "@types/webpack-env": "^1.13.0",
     "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.27.3",
+    "cypress": "^1.0.2",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
