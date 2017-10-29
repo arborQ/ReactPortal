@@ -12,7 +12,7 @@ const Button = styled.button`
     position: relative;
     margin: 0;
     min-width: 64px;
-    padding: 2px 16px;
+    padding: 2px 10px;
     display: inline-block;
     font-family: ${styles.font.family},sans-serif;
     font-size: ${styles.font.size}px;
@@ -29,7 +29,7 @@ const Button = styled.button`
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    line-height: 36px;
+    line-height: ${styles.font.size * 2}px;
     vertical-align: middle;
     background: rgba(158,158,158,.2);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
