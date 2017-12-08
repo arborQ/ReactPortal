@@ -75,4 +75,5 @@ export const ValidationMessage = styled.span`
   color: Red;
   font-size: ${Styles.font.smallSize}px;
   float: right;
+  position: absolute;
 `;
