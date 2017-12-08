@@ -35,18 +35,17 @@ const headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: 
         { path: ChangePasswordUrl, label: "Change password" },
         { path: "/users", label: "Users" },
         { path: "/products", label: "Products" },
-        { path: "/scroll", label: "Scroll" },
     ];
 
     return (
     <Header>
         { paths
-            .map(p =>
+            .map((element: any) =>
             <Link
-                className={ pathname === p.path ? "active" : "" }
-                key={ p.path }
-                to={ p.path }>
-                    { p.label }
+                className={ pathname === element.path ? "active" : "" }
+                key={ element.path }
+                to={ element.path }>
+                    { element.label }
             </Link> ) }
     </Header>);
 };
