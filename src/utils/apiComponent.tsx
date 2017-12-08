@@ -38,9 +38,17 @@ export default class ApiComponent<S>
     return this.props.content(this.state.data);
   }
 
+  componentWillReceiveProps(nextProps: ILoadingProps<S>) {
+    this.updateState(nextProps);
+  }
+
   componentWillMount() {
+    this.updateState(this.props);
+  }
+
+  private updateState(props: ILoadingProps<S>) {
     this.setState({ loading: true, data: null, error: null });
-    ajax.get<S>(this.props.loadUrl).then((data) => {
+    ajax.get<S>(props.loadUrl).then((data) => {
       this.setState({ loading: false, data });
     }).catch(() => {
       this.setState({ loading: false, error: "404" });

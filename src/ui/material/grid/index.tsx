@@ -59,7 +59,8 @@ let GridCell = styled.td`
     text-align: center;
 `;
 
-export default class GridComponent extends React.Component<{ schema: any, model: any[] }, any> {
+export default class GridComponent<T extends { _id: number }>
+extends React.Component<{ schema: any, model: T[] }, any> {
 
   render() {
     const columns = [];
@@ -68,6 +69,12 @@ export default class GridComponent extends React.Component<{ schema: any, model:
     for (const index in this.props.schema) {
       columns.push(index);
     }
+
+    const rows = this.props.model.map((r) => (
+      <GridRow key={r._id}>
+        { columns.map((c) => <GridCell key={`${c}_${r._id}`}>{r[c]}</GridCell>) }
+      </GridRow>
+    ));
 
     return (
       <Grid>
@@ -80,9 +87,7 @@ export default class GridComponent extends React.Component<{ schema: any, model:
           {
             this.props.model.length === 0
               ? <GridRow><GridCell colSpan={columns.length}>No items</GridCell></GridRow>
-              : <GridRow><GridCell colSpan={columns.length}>
-                {`Items: ${this.props.model.length}`}
-              </GridCell></GridRow>
+              : rows
           }
         </GridBody>
       </Grid>
