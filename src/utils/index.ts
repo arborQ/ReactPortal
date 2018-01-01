@@ -4,6 +4,7 @@ import ApiComponent from "./apiComponent";
 import Assign from "./assign";
 import AsyncComponent from "./asyncComponent";
 import Clone from "./clone";
+import StateComponent from "./stateComponent";
 import * as Validator from "./validators";
 
 function debounce(func: () => void, wait: number): () => void {
@@ -23,6 +24,7 @@ export {
     Assign,
     ApiComponent,
     AsyncComponent,
+    StateComponent,
     Clone,
     Validator,
     debounce as Debounce,
