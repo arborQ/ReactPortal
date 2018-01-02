@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Router, Route, Switch, RouteComponentProps } from 'react-router';
-import { Provider } from 'react-redux';
-import LoginContainer from './login';
-import ChangePasswordContainer from './changepassword';
-import store from './store';
-import { LoginUrl, ChangePasswordUrl } from './index';
+import * as React from "react";
+import { Provider } from "react-redux";
+import { Route, RouteComponentProps, Router, Switch } from "react-router";
+import ChangePasswordContainer from "./changepassword";
+import { ChangePasswordUrl, LoginUrl } from "./index";
+import LoginContainer from "./login";
+import store from "./store";
 
 export default class AuthorizeContainer extends React.Component<RouteComponentProps<any>, {}> {
     render() {
@@ -19,6 +19,6 @@ export default class AuthorizeContainer extends React.Component<RouteComponentPr
                     </Provider>
                 </div>
             </div>
-        )
+        );
     }
 }

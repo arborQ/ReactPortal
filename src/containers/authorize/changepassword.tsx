@@ -1,4 +1,6 @@
-import { ButtonComponent, CardComponent, FormComponent, HeaderComponent, InputComponent} from "bx-ui";
+import { ButtonComponent, CardComponent, FormComponent, HeaderComponent, InputComponent } from "bx-ui";
+import { StateComponent } from "bx-utils";
+import { Validator } from "bx-utils";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 
@@ -8,15 +10,10 @@ interface IChangePasswordState {
     confirmPassword: string;
 }
 
-export default class ChangePasswordContainer extends React.Component<RouteComponentProps<any>, IChangePasswordState> {
+export default class ChangePasswordContainer extends StateComponent<RouteComponentProps<any>, IChangePasswordState> {
 
     constructor() {
-        super();
-        this.state = { oldPassword: "", newPassword: "", confirmPassword: "" };
-    }
-
-    updateState(state: any) {
-        this.setState(Object.assign({}, this.state, state));
+        super({ oldPassword: "", newPassword: "", confirmPassword: "" });
     }
 
     render() {
@@ -26,22 +23,28 @@ export default class ChangePasswordContainer extends React.Component<RouteCompon
                 <FormComponent submit={() => { /* empty */ }}>
 
                     <InputComponent
-                    value={this.state.oldPassword}
-                    isPassword={true}
-                    label="Old password"
-                    change={(oldPassword) => { this.updateState({ oldPassword }); }} />
+                        value={this.state.oldPassword}
+                        isPassword={true}
+                        label="Old password"
+                        validator={new Validator.StringRequired()}
+                        change={(oldPassword: string) => { this.updateState({ oldPassword }); }} />
 
                     <InputComponent
-                    value={this.state.newPassword}
-                    isPassword={true}
-                    label="New password"
-                    change={(newPassword) => { this.updateState({ newPassword }); }} />
+                        value={this.state.newPassword}
+                        isPassword={true}
+                        label="New password"
+                        validator={new Validator.StringRequired()}
+                        change={(newPassword: string) => { this.updateState({ newPassword }); }} />
 
                     <InputComponent
-                    value={this.state.confirmPassword}
-                    isPassword={true}
-                    label="Confirm password"
-                    change={(confirmPassword) => { this.updateState({ confirmPassword }); }} />
+                        value={this.state.confirmPassword}
+                        isPassword={true}
+                        label="Confirm password"
+                        validator={
+                            new Validator.Combine([
+                                new Validator.StringRequired(),
+                                new Validator.StringMatch(() => this.state.newPassword)])}
+                        change={(confirmPassword: string) => { this.updateState({ confirmPassword }); }} />
 
                     <ButtonComponent label="Save" />
                 </FormComponent>

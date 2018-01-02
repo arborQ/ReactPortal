@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import styles from "../styles";
 
-let Grid = styled.table`
+const Grid = styled.table`
     position: relative;
     border: 1px solid rgba(0,0,0,.12);
     border-collapse: collapse;
@@ -17,13 +17,13 @@ let Grid = styled.table`
     }
 `;
 
-let GridHeader = styled.thead`
+const GridHeader = styled.thead`
     padding-bottom: 3px;
 `;
 
-let GridRow = styled.tr``;
+const GridRow = styled.tr``;
 
-let GridHeaderCell = styled.th`
+const GridHeaderCell = styled.th`
     position: relative;
     vertical-align: bottom;
     text-overflow: ellipsis;
@@ -40,11 +40,11 @@ let GridHeaderCell = styled.th`
     border-bottom: 2px solid #ececec;
     `;
 
-let GridBody = styled.tbody`
+const GridBody = styled.tbody`
     padding-bottom: 3px;
 `;
 
-let GridCell = styled.td`
+const GridCell = styled.td`
     position: relative;
     vertical-align: bottom;
     text-overflow: ellipsis;

@@ -14,7 +14,7 @@ class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> 
         return (
             <div>
                 <Header {...this.props} />
-                <div>
+                <div style={{ paddingTop: 10 }}>
                     <Switch>
                         <Route exact
                             path="/"
