@@ -14,7 +14,7 @@ module.exports = {
   context: sourcePath,
   entry: {
     main: './index.tsx',
-    
+
     vendor: [
       'react',
       'react-dom',
@@ -37,19 +37,25 @@ module.exports = {
     // Fix webpack's default behavior to not load packages with jsnext:main module
     // https://github.com/Microsoft/TypeScript/issues/11677
     mainFields: ['main'],
-    alias : {
-      'bx-ui' : path.resolve(__dirname, './src/ui/material'),
-      "bx-utils" : path.resolve(__dirname, './src/utils')
+    alias: {
+      'bx-ui': path.resolve(__dirname, './src/ui/material'),
+      "bx-utils": path.resolve(__dirname, './src/utils')
     }
   },
   module: {
-    loaders: [
+    loaders: [{
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        exclude: [/node_modules/],
+        options: { /* Loader options go here */ }
+      },
       // .ts, .tsx
       {
         test: /\.tsx?$/,
-        use: isProduction
-          ? 'awesome-typescript-loader?module=es6'
-          : [
+        use: isProduction ?
+          'awesome-typescript-loader?module=es6' :
+          [
             'awesome-typescript-loader'
           ]
       },
@@ -58,8 +64,7 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [
-            {
+          use: [{
               loader: 'css-loader',
               query: {
                 modules: true,
@@ -75,9 +80,18 @@ module.exports = {
         })
       },
       // static assets
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.png$/, use: 'url-loader?limit=10000' },
-      { test: /\.jpg$/, use: 'file-loader' },
+      {
+        test: /\.html$/,
+        use: 'html-loader'
+      },
+      {
+        test: /\.png$/,
+        use: 'url-loader?limit=10000'
+      },
+      {
+        test: /\.jpg$/,
+        use: 'file-loader'
+      },
     ],
   },
   plugins: [
@@ -85,11 +99,15 @@ module.exports = {
       options: {
         context: sourcePath,
         postcss: [
-          require('postcss-import')({ addDependencyTo: webpack }),
+          require('postcss-import')({
+            addDependencyTo: webpack
+          }),
           require('postcss-url')(),
           require('postcss-cssnext')(),
           require('postcss-reporter')(),
-          require('postcss-browser-reporter')({ disabled: isProduction }),
+          require('postcss-browser-reporter')({
+            disabled: isProduction
+          }),
         ]
       }
     }),
