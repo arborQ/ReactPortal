@@ -16,3 +16,15 @@ export interface IInputState {
     working: boolean;
     messages?: string[];
 }
+
+// declare namespace UI.Button {
+//     export interface IButtonProps {
+//         label: string;
+//         click?: () => void | Promise<any>;
+//       }
+      
+//       export interface IButtonState {
+//         working: boolean;
+//       }
+      
+// }

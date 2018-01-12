@@ -1,4 +1,4 @@
-import ButtonComponent from "./button/button";
+import ButtonComponent from "./button";
 import CardComponent from "./card";
 import FormComponent from "./form";
 import GridComponent from "./grid";
