@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Styles from '../styles';
+import styled from "styled-components";
+import Styles from "../styles";
 
 export default styled.div`
   height: 4px;

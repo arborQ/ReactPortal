@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import styles from '../styles';
+import styled from "styled-components";
+import styles from "../styles";
 
 export default styled.h3`
     font-family: ${styles.font.family},sans-serif;

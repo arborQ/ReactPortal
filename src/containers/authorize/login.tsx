@@ -5,7 +5,7 @@ import {
     HeaderComponent,
     InputComponent,
 } from "bx-ui";
-import { ajax } from "bx-utils";
+import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -42,22 +42,17 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
         };
     },
 )
-export default class LoginContainer extends React.Component<ILoginProps, ILoginState> {
+export default class LoginContainer extends StateComponent<ILoginProps, ILoginState> {
     constructor() {
-        super();
-        this.state = { login: "", password: "" };
+        super({ login: "", password: "" });
     }
 
     componentDidMount() {
         if (!!this.props.login) {
             this.props.history.push("/users/list");
         } else {
-            this.setState(Object.assign({}, this.state, { login: this.props.login || "", password: "" }));
+            this.updateState({ login: this.props.login || "", password: "" });
         }
-    }
-
-    updateState(state: any) {
-        this.setState(Object.assign({}, this.state, state));
     }
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
@@ -73,13 +68,12 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
 
         const fieldValidator = new Validator.Combine([
             new Validator.StringRequired(),
-            new Validator.StringLength(1, 50),
+            new Validator.StringLength(1),
         ]);
 
         const matchValidator = new Validator.Combine([
             new Validator.StringRequired(),
-            new Validator.StringLength(10),
-            new Validator.StringMatch(() => this.state.login),
+            new Validator.StringLength(1),
         ]);
 
         const inputs: Ui.Input.IProps[] = [

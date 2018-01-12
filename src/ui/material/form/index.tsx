@@ -1,12 +1,12 @@
-import * as React from 'react';
-import LoadingComponent from '../loader';
+import * as React from "react";
+import LoadingComponent from "../loader";
 
 interface IFormProps extends React.HTMLProps<any> {
   submit: () => Promise<any> | void;
   loadingMessage?: string;
 }
 
-export default class FormComponent extends React.Component<IFormProps , { isLoading: boolean }> {
+export default class FormComponent extends React.Component<IFormProps, { isLoading: boolean }> {
   constructor() {
     super();
     this.state = { isLoading: false };
@@ -26,9 +26,13 @@ export default class FormComponent extends React.Component<IFormProps , { isLoad
   }
 
   render() {
-      return (
+    return (
       <form onSubmit={this.submitAction.bind(this)}>
-        { this.state.isLoading ? <div>{ this.props.loadingMessage ? this.props.loadingMessage: <LoadingComponent></LoadingComponent> }</div> : this.props.children }
+        {
+          this.state.isLoading
+            ? <div>{this.props.loadingMessage ? this.props.loadingMessage : <LoadingComponent></LoadingComponent>}</div>
+            : this.props.children
+        }
       </form>);
   }
 }

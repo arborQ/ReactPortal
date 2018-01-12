@@ -19,6 +19,6 @@ export default class AuthorizeContainer extends React.Component<RouteComponentPr
                     </Provider>
                 </div>
             </div>
-        )
+        );
     }
 }
