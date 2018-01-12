@@ -22,7 +22,7 @@ export default class IndexComponent<P> extends React.Component<RouteComponentPro
 
   render() {
     return (
-      <CardComponent size={300} style={{ maxWidth: 800, width: "80%", margin: "0 auto" }}>
+      <CardComponent size={300}>
         <ApiComponent
           loadUrl={this.state.apiUrl}
           content={(data: any) =>
