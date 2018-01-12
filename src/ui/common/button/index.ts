@@ -16,7 +16,6 @@ export default abstract class CommonButtonComponent extends React.Component<Ui.B
         });
     }
 
-    abstract renderButton(renderProps: Ui.Button.IRenderProps): JSX.Element;
 
     render() {
         let text = this.props.label.trim();
@@ -36,4 +35,6 @@ export default abstract class CommonButtonComponent extends React.Component<Ui.B
             this.renderButton(renderProps)
         );
     }
+
+    protected abstract renderButton(renderProps: Ui.Button.IRenderProps): JSX.Element;
 }

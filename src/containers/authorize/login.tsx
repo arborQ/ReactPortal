@@ -4,7 +4,6 @@ import {
     FormComponent,
     HeaderComponent,
     InputComponent,
-    Interfaces as UI
 } from "bx-ui";
 import { ajax } from "bx-utils";
 import { Validator } from "bx-utils";
@@ -83,7 +82,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
             new Validator.StringMatch(() => this.state.login),
         ]);
 
-        const inputs: UI.IInputProps[] = [
+        const inputs: Ui.Input.IProps[] = [
             {
                 change: (login: string) => { this.updateState({ login }); },
                 label: "Login",
@@ -106,7 +105,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
                 <HeaderComponent>Log in</HeaderComponent>
                 <FormComponent submit={this.submit.bind(this)}>
                     {
-                        inputs.map((input: UI.IInputProps, i: number) => <InputComponent key={i} {...input} />)
+                        inputs.map((input: Ui.Input.IProps, i: number) => <InputComponent key={i} {...input} />)
                     }
                     <ButtonComponent label="Save" />
                 </FormComponent>

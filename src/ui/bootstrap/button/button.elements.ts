@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import styles from "../styles";
+import Styles from "../styles";
 
 export const Button = styled.button`
     display: inline-block;
@@ -20,4 +20,7 @@ export const Button = styled.button`
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
+
+    font-size: ${Styles.font.size}px;
+    font-family: ${Styles.font.family},sans-serif;
 `;
