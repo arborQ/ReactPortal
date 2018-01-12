@@ -4,7 +4,6 @@ import {
     FormComponent,
     HeaderComponent,
     InputComponent,
-    Interfaces as UI,
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
@@ -77,7 +76,7 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
             new Validator.StringLength(1),
         ]);
 
-        const inputs: UI.IInputProps[] = [
+        const inputs: Ui.Input.IProps[] = [
             {
                 change: (login: string) => { this.updateState({ login }); },
                 label: "Login",
@@ -96,11 +95,10 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
         ];
 
         return (
-            <CardComponent size={400}>
-                <HeaderComponent>Log in</HeaderComponent>
+            <CardComponent size={400} title={"Log in"} subTitle={"Please provide credentials"}>
                 <FormComponent submit={this.submit.bind(this)}>
                     {
-                        inputs.map((input: UI.IInputProps, i: number) => <InputComponent key={i} {...input} />)
+                        inputs.map((input: Ui.Input.IProps, i: number) => <InputComponent key={i} {...input} />)
                     }
                     <ButtonComponent label="Save" />
                 </FormComponent>
