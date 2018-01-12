@@ -16,7 +16,6 @@ export default abstract class CommonButtonComponent extends React.Component<Ui.B
         });
     }
 
-
     render() {
         let text = this.props.label.trim();
 
