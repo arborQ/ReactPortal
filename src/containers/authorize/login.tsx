@@ -101,8 +101,7 @@ export default class LoginContainer extends React.Component<ILoginProps, ILoginS
         ];
 
         return (
-            <CardComponent size={400}>
-                <HeaderComponent>Log in</HeaderComponent>
+            <CardComponent size={400} title={"Log in"} subTitle={"Please provide credentials"}>
                 <FormComponent submit={this.submit.bind(this)}>
                     {
                         inputs.map((input: Ui.Input.IProps, i: number) => <InputComponent key={i} {...input} />)

@@ -8,6 +8,7 @@ export default {
     },
     font: {
         family: "Montserrat",
+        sizeBig: 14,
         size: 12,
         smallSize: 10,
     },
