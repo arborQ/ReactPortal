@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export default abstract class GridComponent
-    extends React.Component<{ schema: Application.Users.IUserStoreState, model: any[] }, {}> {
+    extends React.Component<Ui.Grid.IProps, {}> {
 
     render() {
         return null;
@@ -41,13 +41,8 @@ export default abstract class GridComponent
             const schemaForKey: Ui.Grid.IColumnState = this.props.schema[name];
             const result: Ui.Grid.IColumnRenderState = {
                 name,
-                displayName: name,
-                renderContent: (): JSX.Element | string => {
-                    if (!schemaForKey.renderContent) {
-                        return schemaForKey.getData();
-                    }
-                    return schemaForKey.renderContent();
-                },
+                displayName: schemaForKey.displayName || name,
+                renderContent: !schemaForKey.renderContent ? schemaForKey.getData : schemaForKey.renderContent,
             };
 
             return result;

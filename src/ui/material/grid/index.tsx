@@ -15,9 +15,9 @@ export default class GridComponent<T extends { _id: number }>
   render() {
     const columns = super.enumerateCells();
 
-    const rows = this.props.model.map((r) => (
-      <GridRow key={r._id}>
-        {columns.map((c) => <GridCell key={c.name}>{c.renderContent()}</GridCell>)}
+    const rows = this.props.data.map((r, index) => (
+      <GridRow key={index}>
+        {columns.map((c) => <GridCell key={c.name}>{c.renderContent(r)}</GridCell>)}
       </GridRow>
     ));
 
@@ -30,7 +30,7 @@ export default class GridComponent<T extends { _id: number }>
         </GridHeader>
         <GridBody>
           {
-            this.props.model.length === 0
+            this.props.data.length === 0
               ? <GridRow><GridCell colSpan={columns.length}>No items</GridCell></GridRow>
               : rows
           }

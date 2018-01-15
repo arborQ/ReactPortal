@@ -33,7 +33,7 @@ export default class IndexComponent<P> extends React.Component<RouteComponentPro
                   this.props.history.push(`${this.state.apiUrl}/add`);
                 }} />
               <Link to={`${this.props.location.pathname}/add`}>Add</Link>
-              <GridComponent schema={data.schema} model={data.data} />
+              <GridComponent schema={data.schema} data={data.data} />
             </div>
           } />
       </CardComponent>
