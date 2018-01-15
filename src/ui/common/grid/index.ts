@@ -1,39 +1,25 @@
 import * as React from "react";
 
 export default abstract class GridComponent
-    extends React.Component<Ui.Grid.IProps, {}> {
+    extends React.Component<Ui.Grid.IProps, { selectedRows: any[] }> {
+    constructor() {
+        super();
+        this.state = { selectedRows: [] };
+    }
+    onRowClicked(rowData: any): void {
+        if (!!this.props.onSelected) {
+            const selectedRows = this.state.selectedRows.includes(rowData)
+                ? [...this.state.selectedRows.filter((s) => s !== rowData)]
+                : [...this.state.selectedRows, rowData];
 
-    render() {
-        return null;
-        // const columns = [];
+            Promise.resolve(this.props.onSelected(selectedRows)).then(() => {
+                this.setState({ selectedRows });
+            });
+        }
+    }
 
-        // // tslint:disable-next-line:forin
-        // for (const index in this.props.schema) {
-        //   columns.push(index);
-        // }
-
-        // const rows = this.props.model.map((r) => (
-        //   <GridRow key={r._id}>
-        //     { columns.map((c) => <GridCell key={`${c}_${r._id}`}>{r[c]}</GridCell>) }
-        //   </GridRow>
-        // ));
-
-        // return (
-        //   <Grid>
-        //     <GridHeader>
-        //       <GridRow>
-        //         {columns.map((c: string) => <GridHeaderCell key={c}>{c}</GridHeaderCell>)}
-        //       </GridRow>
-        //     </GridHeader>
-        //     <GridBody>
-        //       {
-        //         this.props.model.length === 0
-        //           ? <GridRow><GridCell colSpan={columns.length}>No items</GridCell></GridRow>
-        //           : rows
-        //       }
-        //     </GridBody>
-        //   </Grid>
-        // );
+    isRowSelected(rowData: any): boolean {
+        return this.state.selectedRows.includes(rowData);
     }
 
     protected enumerateCells(): Ui.Grid.IColumnRenderState[] {

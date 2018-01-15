@@ -10,6 +10,7 @@ declare namespace Ui.Grid {
     export interface IProps {
         schema: IGridSchema;
         data: any[];
+        onSelected?: (data: any[]) => Promise<any> | void;
     }
 
     export interface IState {

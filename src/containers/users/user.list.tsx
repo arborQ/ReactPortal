@@ -80,7 +80,12 @@ export default class LoginContainer extends StateComponent<{}, Application.Users
 
         return (
             <CardComponent title={"List of users"} subTitle={"You can see list of users"}>
-                <GridComponent schema={this.gridSchema} data={data} />
+                <GridComponent
+                    schema={this.gridSchema}
+                    data={data}
+                    onSelected={(users: Application.Users.IUser[]) => {
+                        /* */
+                    }} />
             </CardComponent>
         );
     }
