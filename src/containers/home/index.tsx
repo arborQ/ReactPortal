@@ -6,6 +6,7 @@ import * as X from "react-router-dom";
 import Header from "./header";
 
 import { AuthorizeComponent, AuthorizeUrl } from "../authorize";
+import { UsersListComponent, UsersUrl } from "../users";
 
 import IndexComponent from "../indexComponent";
 
@@ -22,6 +23,7 @@ class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> 
                                 () => System.import("./home.component").then((module) => module.default))}
                         />
                         <Route path={AuthorizeUrl} component={AuthorizeComponent} />
+                        <Route path={UsersUrl} component={UsersListComponent} />
                         <Route component={IndexComponent} />
                     </Switch>
                 </div>
