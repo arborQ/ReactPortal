@@ -20,7 +20,9 @@ export const GridHeader = styled.thead`
     padding-bottom: 3px;
 `;
 
-export const GridRow = styled.tr``;
+export const GridRow = styled.tr`
+    background-color: ${(props) => props.selected ? "#ececec" : "#fff"};
+`;
 
 export const GridHeaderCell = styled.th`
     position: relative;

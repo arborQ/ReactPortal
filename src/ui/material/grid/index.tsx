@@ -16,7 +16,7 @@ export default class GridComponent<T extends { _id: number }>
     const columns = super.enumerateCells();
 
     const rows = this.props.data.map((r, index) => (
-      <GridRow key={index}>
+      <GridRow key={index} selected={super.isRowSelected(r)} onClick={() => { super.onRowClicked(r); }}>
         {columns.map((c) => <GridCell key={c.name}>{c.renderContent(r)}</GridCell>)}
       </GridRow>
     ));

@@ -1,4 +1,5 @@
 import {
+    AnchorComponent,
     ButtonComponent,
     CardComponent,
     GridComponent,
@@ -8,22 +9,6 @@ import { Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
-
-interface ILoginDataProps {
-    login: string;
-}
-
-interface ILoginState {
-    login: string;
-    password: string;
-}
-
-interface ILoginActionProps {
-    changeLogin(login: string): void;
-}
-
-interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
-}
 
 @connect((store: Application.Users.IUserStoreState, b) => {
     const { users } = store;
@@ -38,7 +23,7 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
         };
     },
 )
-export default class LoginContainer extends StateComponent<{}, Application.Users.IUserStoreState> {
+export default class UserListContainer extends StateComponent<{}, Application.Users.IUserStoreState> {
 
     private get gridSchema(): Ui.Grid.IGridSchema {
         return {
@@ -80,6 +65,9 @@ export default class LoginContainer extends StateComponent<{}, Application.Users
 
         return (
             <CardComponent title={"List of users"} subTitle={"You can see list of users"}>
+                <div>
+                    <AnchorComponent href="/users/add">Add user</AnchorComponent>
+                </div>
                 <GridComponent
                     schema={this.gridSchema}
                     data={data}
