@@ -3,20 +3,24 @@ var webpack = require("webpack");
 var config = require("../webpack.config.js");
 var compiler = webpack(config);
 
+var proxy = {
+  "target": {
+    "host": "localhost",
+    "protocol": 'http',
+    "port": 8011
+  },
+  onError: function() { console.log('error'); },
+  secure: false
+};
+
 var server = new webpackDevServer(compiler, {
   quiet: false,
   stats: { colors: true, chunks: false },
   hot: true,
   historyApiFallback: true,
   proxy: {
-    "/api": {
-      "target": {
-        "host": "localhost",
-        "protocol": 'http',
-        "port": 8011
-      },
-      secure: false
-    }
+    "/api": proxy,
+    "/socket.io" : proxy
   }
 });
 server.listen(8080);
