@@ -22,6 +22,13 @@ module.exports = {
       'react-router',
       'redux',
       'styled-components',
+    ],
+    polifil: [ 
+      "dialog-polyfill",
+    ],
+    bx: [
+      "bx-utils",
+      "bx-ui"
     ]
   },
   output: {

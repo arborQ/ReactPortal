@@ -20,13 +20,13 @@ export default class InputComponent extends BaseInputComponent {
           required
           type={!!this.props.isPassword ? "password" : "text"}
           value={this.state.value}
-          onBlur={() => { this.setState(Object.assign(this.state, { value: this.props.value }));  }}
-          onChange={(e: any) => this.updateParent(e.target.value)} />
+          onBlur={() => { this.setState(Object.assign(this.state, { value: this.props.value })); }}
+          onChange={(e: any) => { this.updateParent(e.target.value); }} />
         <Label htmlFor={this.props.name}>{this.props.label}</Label>
         {
           !!this.state.messages && !!this.state.messages.length
-          ? <ValidationMessage>{ this.state.messages.join() }</ValidationMessage>
-          : null
+            ? <ValidationMessage>{this.state.messages.join()}</ValidationMessage>
+            : null
         }
       </InputContainer>
     );
