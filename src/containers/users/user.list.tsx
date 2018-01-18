@@ -23,7 +23,8 @@ import { RouteComponentProps, Router, RouterProps } from "react-router";
         };
     },
 )
-export default class UserListContainer extends StateComponent<{}, Application.Users.IUserStoreState> {
+export default class UserListContainer
+    extends StateComponent<RouteComponentProps<{}>, Application.Users.IUserStoreState> {
 
     private get gridSchema(): Ui.Grid.IGridSchema {
         return {
