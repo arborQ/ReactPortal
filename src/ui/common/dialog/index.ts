@@ -1,20 +1,18 @@
 import * as React from "react";
+import StateComponent from "../../../utils/stateComponent";
 
-import * as XX from "bx-utils";
-console.log("StateComponent", XX);
-export default class DialogCommonComponent extends React.Component<Ui.Dialog.IProps, Ui.Dialog.IState> {
+export default class DialogCommonComponent
+    extends StateComponent<Ui.Dialog.IProps, Ui.Dialog.IState>
+    implements Ui.Dialog.IModelDialog {
 
     constructor() {
-        super();
-        this.state = { isOpen: true };
+        super({ isOpen: false });
     }
 
     open(): Promise<any> {
-        return null;
-        // return this.updateState({ isOpen: true });
+        return this.updateState({ isOpen: true });
     }
     close(): void {
-        // this.updateState({ isOpen: false });
+        this.updateState({ isOpen: false });
     }
-
 }

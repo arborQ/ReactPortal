@@ -13,7 +13,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: sourcePath,
   entry: {
-    main: './index.tsx',
+    main: [
+      "bx-utils",
+      "bx-ui",      
+      './index.tsx'],
 
     vendor: [
       'react',
@@ -25,10 +28,6 @@ module.exports = {
     ],
     polifil: [ 
       "dialog-polyfill",
-    ],
-    bx: [
-      "bx-utils",
-      "bx-ui"
     ]
   },
   output: {

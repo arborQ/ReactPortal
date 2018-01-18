@@ -31,10 +31,12 @@ export default class UserAddContainer extends StateComponent<{}, Application.Use
         firstName: "",
     };
 
+    dialog: Ui.Dialog.IModelDialog | null = null;
+
     render() {
 
         return (
-            <DialogComponent>
+            <DialogComponent ref={(dialog: Ui.Dialog.IModelDialog) => { dialog.open().then(() => { /* */ });  }}>
                 <CardComponent title={"Add user"} subTitle={"Fill data to add new user"}>
                     <InputComponent name="login" label="Login" value={this.state.login}
                         change={(login) => {
