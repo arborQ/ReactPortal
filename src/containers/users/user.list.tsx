@@ -8,7 +8,9 @@ import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps, Router, RouterProps } from "react-router";
+import { Route, RouteComponentProps, Router, RouterProps } from "react-router";
+import { Link } from "react-router-dom";
+import UserAddComponent from "./user.add";
 
 @connect((store: Application.Users.IUserStoreState, b) => {
     const { users } = store;
@@ -66,8 +68,9 @@ export default class UserListContainer
 
         return (
             <CardComponent title={"List of users"} subTitle={"You can see list of users"}>
+                <Route path={`/users/add`} component={UserAddComponent} />
                 <div>
-                    <AnchorComponent href="/users/add">Add user</AnchorComponent>
+                    <Link to="/users/add">Add user</Link>
                 </div>
                 <GridComponent
                     schema={this.gridSchema}

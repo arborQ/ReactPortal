@@ -36,6 +36,7 @@ export default class UserAddContainer extends StateComponent<RouteComponentProps
     render() {
         return (
             <DialogComponent
+                title={"Add new user"}
                 ref={(dialog: Ui.Dialog.IModelDialog | null) => {
                     if (dialog != null) {
                         dialog.open().then(() => {

@@ -5,6 +5,7 @@ declare namespace Ui.Dialog {
     }
 
     export interface IProps {
+        title?: string;
     }
 
     export interface IState {

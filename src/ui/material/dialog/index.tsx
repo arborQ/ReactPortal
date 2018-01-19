@@ -1,17 +1,16 @@
 import * as React from "react";
 import DialogCommonComponent from "../../common/dialog";
-import { Backdrop, Dialog } from "./dialog.elements";
+import { Backdrop, Dialog, DialogBody, DialogFooter, DialogHeader } from "./dialog.elements";
 
 export default class DialogComponent extends DialogCommonComponent {
     render() {
-        if (!this.state.isOpen) {
-            return null;
-        }
-
         return (
             <div>
-                <Dialog open={true}>{this.props.children}</Dialog>
-                <Backdrop className="backdrop" onClick={() => { this.close(); }}></Backdrop>
+                <Dialog open={this.state.isOpen}>
+                    {this.props.title === undefined ? null : <DialogHeader>{this.props.title}</DialogHeader>}
+                    <DialogBody>{this.props.children}</DialogBody>
+                </Dialog>
+                <Backdrop className="backdrop" onClick={() => { this.close(); }} open={this.state.isOpen}></Backdrop>
             </div>
         );
     }
