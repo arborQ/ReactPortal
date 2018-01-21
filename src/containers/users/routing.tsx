@@ -4,6 +4,7 @@ import { Route, RouteComponentProps, Router, Switch } from "react-router";
 import { UsersUrl } from "./";
 import store from "./store";
 import UserListComponent from "./user.list";
+import UserAddComponent from "./user.add";
 
 export default class AuthorizeContainer extends React.Component<RouteComponentProps<any>, {}> {
     render() {
@@ -12,7 +13,8 @@ export default class AuthorizeContainer extends React.Component<RouteComponentPr
                 <div>
                     <Provider store={store}>
                         <Switch>
-                            <Route path={UsersUrl} component={UserListComponent} />
+                            <Route exact path={UsersUrl} component={UserListComponent} />
+                            <Route exact path={"/users/add"} component={UserAddComponent} />
                         </Switch>
                     </Provider>
                 </div>

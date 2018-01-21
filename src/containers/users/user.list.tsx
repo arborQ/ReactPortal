@@ -57,9 +57,12 @@ export default class UserListContainer
             },
         };
     }
-
+    componentWillMount() {
+        ajax.get("/api/users").then((data) => {
+            console.log(data);
+        });
+    }
     render() {
-
         const data: Application.Users.IUser[] = [
             { isActive: true, firstName: "Lukasz", lastName: "Wojcik", login: "arbor", email: "arbor@o2.pl" },
             { isActive: true, firstName: "Aleksandra", lastName: "Wojcik", login: "ola", email: "arbor@o3.pl" },
@@ -68,7 +71,6 @@ export default class UserListContainer
 
         return (
             <CardComponent title={"List of users"} subTitle={"You can see list of users"}>
-                <Route path={`/users/add`} component={UserAddComponent} />
                 <div>
                     <Link to="/users/add">Add user</Link>
                 </div>

@@ -5,7 +5,7 @@ export const Button = styled.button`
     background: 0 0;
     border: none;
     border-radius: 2px;
-    color: #000;
+    color: ${styles.colors.mainContrast};
     position: relative;
     margin: 0;
     min-width: 64px;
@@ -19,15 +19,15 @@ export const Button = styled.button`
     overflow: hidden;
     will-change: box-shadow;
     transition:
-    box-shadow .2s cubic-bezier(.4,0,1,1),
-    background-color .2s cubic-bezier(.4,0,.2,1),
+        box-shadow .2s cubic-bezier(.4,0,1,1),
+        background-color .2s cubic-bezier(.4,0,.2,1),
     color .2s cubic-bezier(.4,0,.2,1);
     outline: none;
-    cursor: pointer;
+    cursor: ${ (p: { disabled: boolean }) => p.disabled ? "not-allowed" : "pointer"};
     text-decoration: none;
     text-align: center;
     line-height: ${styles.font.size * 2}px;
     vertical-align: middle;
-    background: rgba(158,158,158,.2);
+    background: ${ (p: { disabled: boolean }) => p.disabled ? styles.colors.mainLight : styles.colors.main};
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
 `;
