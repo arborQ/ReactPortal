@@ -11,7 +11,7 @@ export default class CombineValidation<T> implements IValidator<T> {
             return ValidationHelper.SuccessValidation();
         })
         .catch((result: IValidationResult) => {
-            return ValidationHelper.FailValidation(result.messages);
+            return ValidationHelper.FailValidation((result.messages || []).join(" "));
         });
     }
 }

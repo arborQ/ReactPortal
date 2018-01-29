@@ -48,7 +48,7 @@ export const Dialog = styled.dialog`
 	max-width: 90%;
 	min-width: 320px;
 	height: auto;
-	z-index: 2000;
+	z-index: ${(props: { open?: boolean }) => !!props.open ? 2000 : 0};
     padding: 0;
     &[open] {
         animation: ${jumpIn} 0.3s linear;

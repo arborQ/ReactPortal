@@ -22,7 +22,7 @@ export default abstract class InputComponent extends React.Component<Ui.Input.IP
         .then((result) => {
           this.setState(Object.assign(this.state, { isValid: true, working: false, messages: [] }));
         }).catch((result: Validator.ValidatorInterfaces.IValidationResult) => {
-          this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [...result.messages] }));
+          this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [ result.messages ] }));
         });
     }
   }

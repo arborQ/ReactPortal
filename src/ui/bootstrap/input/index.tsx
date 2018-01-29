@@ -13,7 +13,7 @@ import { Validator } from "bx-utils";
 export default class InputComponent extends BaseInputComponent {
   renderInput() {
     return (
-      <InputContainer htmlFor={this.props.name}>
+      <InputContainer>
         <Label htmlFor={this.props.name}>{this.props.label}</Label>
         <Input
           name={this.props.name}

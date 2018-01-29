@@ -8,7 +8,7 @@ import StateComponent from "./stateComponent";
 import * as Validator from "./validators";
 
 function debounce(func: () => void, wait: number): () => void {
-    let timeout: NodeJS.Timer = null;
+    let timeout: NodeJS.Timer | null = null;
 
     return () => {
         if (!!timeout) {

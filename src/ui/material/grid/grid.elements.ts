@@ -21,7 +21,7 @@ export const GridHeader = styled.thead`
 `;
 
 export const GridRow = styled.tr`
-    background-color: ${(props) => props.selected ? "#ececec" : "#fff"};
+    background-color: ${(props: { selected?: boolean }) => props.selected ? "#ececec" : "#fff"};
 `;
 
 export const GridHeaderCell = styled.th`

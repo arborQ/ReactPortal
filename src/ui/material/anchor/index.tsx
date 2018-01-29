@@ -6,7 +6,7 @@ export default class AnchorComponent extends AnchorBaseComponent {
     render() {
         const attr = this.anchorAttributes;
         return (
-            <Anchor to={attr.href}>
+            <Anchor to={attr.href || ""}>
                 {this.props.children}
             </Anchor>
         );

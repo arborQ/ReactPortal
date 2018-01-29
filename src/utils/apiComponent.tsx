@@ -9,7 +9,7 @@ export interface ILoadingProps<T> {
 export interface ILoadingState<T> {
   loading: boolean;
   error?: string;
-  data: T;
+  data?: T;
 }
 
 export default class ApiComponent<S>
@@ -35,6 +35,10 @@ export default class ApiComponent<S>
       return this.renderCantFind();
     }
 
+    if (this.state.data === undefined) {
+      return null;
+    }
+
     return this.props.content(this.state.data);
   }
 
@@ -47,7 +51,7 @@ export default class ApiComponent<S>
   }
 
   private updateState(props: ILoadingProps<S>) {
-    this.setState({ loading: true, data: null, error: null });
+    this.setState({ loading: true });
     ajax.get<S>(props.loadUrl).then((data) => {
       this.setState({ loading: false, data });
     }).catch(() => {

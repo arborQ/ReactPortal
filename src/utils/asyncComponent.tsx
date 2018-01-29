@@ -1,7 +1,7 @@
 import { LoadingComponent } from "bx-ui";
 import * as React from "react";
 
-export default function asyncComponent(getComponent?: () => Promise<any>): any {
+export default function asyncComponent(getComponent: () => Promise<any>): any {
     return  class AsyncComponent extends React.Component<any, { component: any }> {
 
         constructor() {
