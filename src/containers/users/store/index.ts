@@ -1,5 +1,4 @@
 import { Assign } from "bx-utils";
-import { combineReducers, createStore } from "redux";
 import * as io from "socket.io-client";
 
 // const socket = io();
@@ -12,8 +11,8 @@ import * as io from "socket.io-client";
 
 type IUserStoreState = Application.Users.IUserStoreState;
 
-export default createStore<IUserStoreState>(combineReducers({
-    user: (s: IUserStoreState = { users: [] }, a: any): IUserStoreState => {
-        return s;
-    },
-}));
+// export default createStore<IUserStoreState>(combineReducers({
+//     user: (s: IUserStoreState = { users: [] }, a: any): IUserStoreState => {
+//         return s;
+//     },
+// }));

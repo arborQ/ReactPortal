@@ -7,24 +7,23 @@ import {
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
 import * as React from "react";
-import { connect } from "react-redux";
 import { Route, RouteComponentProps, Router, RouterProps } from "react-router";
 import { Link } from "react-router-dom";
 import UserAddComponent from "./user.add";
 
-@connect((store: Application.Users.IUserStoreState, b) => {
-    const { users } = store;
-    return {
-    };
-},
-    (dispach: any) => {
-        return {
-            changeLogin(login: string) {
-                dispach({ type: "change_login", login });
-            },
-        };
-    },
-)
+// @connect((store: Application.Users.IUserStoreState, b) => {
+//     const { users } = store;
+//     return {
+//     };
+// },
+//     (dispach: any) => {
+//         return {
+//             changeLogin(login: string) {
+//                 dispach({ type: "change_login", login });
+//             },
+//         };
+//     },
+// )
 export default class UserListContainer
     extends StateComponent<RouteComponentProps<{}>, Application.Users.IUserStoreState> {
 

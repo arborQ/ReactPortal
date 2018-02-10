@@ -21,9 +21,7 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
-      'react-redux',
       'react-router',
-      'redux',
       'styled-components',
     ],
     polifil: [ 

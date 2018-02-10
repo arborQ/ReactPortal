@@ -7,8 +7,8 @@ import {
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
+import * as m from "mobx";
 import * as React from "react";
-import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
 import { IAuthorizeStoreState } from "./store";
 
@@ -28,20 +28,20 @@ interface ILoginActionProps {
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
 
-@connect((store: IAuthorizeStoreState, b) => {
-    const { user } = store;
-    return {
-        login: user.login,
-    };
-},
-    (dispach: any) => {
-        return {
-            changeLogin(login: string) {
-                dispach({ type: "change_login", login });
-            },
-        };
-    },
-)
+// @connect((store: IAuthorizeStoreState, b) => {
+//     const { user } = store;
+//     return {
+//         login: user.login,
+//     };
+// },
+//     (dispach: any) => {
+//         return {
+//             changeLogin(login: string) {
+//                 dispach({ type: "change_login", login });
+//             },
+//         };
+//     },
+// )
 export default class LoginContainer extends StateComponent<ILoginProps, ILoginState> {
     constructor() {
         super({ login: "", password: "" });

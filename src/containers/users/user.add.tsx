@@ -8,22 +8,21 @@ import {
 } from "bx-ui";
 import { ajax, StateComponent, Validator } from "bx-utils";
 import * as React from "react";
-import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
 
-@connect((store: Application.Users.IUserStoreState, b) => {
-    const { users } = store;
-    return {
-    };
-},
-    (dispach: any) => {
-        return {
-            changeLogin(login: string) {
-                dispach({ type: "change_login", login });
-            },
-        };
-    },
-)
+// @connect((store: Application.Users.IUserStoreState, b) => {
+//     const { users } = store;
+//     return {
+//     };
+// },
+//     (dispach: any) => {
+//         return {
+//             changeLogin(login: string) {
+//                 dispach({ type: "change_login", login });
+//             },
+//         };
+//     },
+// )
 export default class UserAddContainer extends StateComponent<RouteComponentProps<{}>, Application.Users.IUser> {
 
     addSchema: { [key: string]: string } = {
