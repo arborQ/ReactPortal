@@ -1,5 +1,5 @@
 import { Assign } from "bx-utils";
-
+import { computed, observable } from "mobx";
 export interface IAuthorizeUser {
     login: string | null;
     authorizedOn?: Date;
@@ -20,3 +20,13 @@ export interface IAuthorizeStoreState {
 //         return s;
 //     },
 // }));
+
+export default class LoginStore {
+    @observable login: "";
+    @observable password: "";
+
+    @computed
+    get isValid(): boolean {
+        return this.login.length > 0 && this.password.length > 0;
+    }
+}

@@ -22,6 +22,8 @@ module.exports = {
       'react',
       'react-dom',
       'react-router',
+      'mobx',
+      'mobx-react',
       'styled-components',
     ],
     polifil: [ 

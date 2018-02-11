@@ -7,10 +7,11 @@ import {
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
-import * as m from "mobx";
+import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
 import { IAuthorizeStoreState } from "./store";
+import store from "./store";
 
 interface ILoginDataProps {
     login: string;
@@ -42,6 +43,7 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
 //         };
 //     },
 // )
+@observer
 export default class LoginContainer extends StateComponent<ILoginProps, ILoginState> {
     constructor() {
         super({ login: "", password: "" });
