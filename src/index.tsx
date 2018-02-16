@@ -6,6 +6,8 @@ import { Route, Router, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import Home from "./containers/home";
 
+import ServiceWorker from "./serviceWorker";
+
 const history = createBrowserHistory();
 
 ReactDOM.render(
@@ -14,3 +16,5 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root"),
 );
+
+ServiceWorker();
