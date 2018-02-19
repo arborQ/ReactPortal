@@ -1,17 +1,24 @@
-export default function() {
-  if ("serviceWorker" in navigator && "PushManager" in window) {
-    console.log("Service Worker and Push is supported");
+import { urlB64ToUint8Array } from "./helpers";
 
+function register(): Promise<PushManager> {
+  return new Promise<PushManager>((resolve) => {
     navigator.serviceWorker.register("sw.js")
       .then((swReg) => {
         console.log("Service Worker is registered", swReg);
-
-        // swRegistration = swReg;
-      })
-      .catch((error) => {
-        console.error("Service Worker Error", error);
+        resolve(swReg.pushManager);
       });
-  } else {
-    console.warn("Push messaging is not supported");
-  }
+  });
+}
+
+export function subscribeUser(key: string) {
+  const applicationServerKey = urlB64ToUint8Array(key);
+
+  register().then((pushManager) => {
+    pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey,
+    }).then((subscription) => {
+      console.log(JSON.stringify(subscription));
+    });
+  });
 }
