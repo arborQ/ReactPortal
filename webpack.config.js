@@ -9,8 +9,7 @@ var sourcePath = path.join(__dirname, './src');
 var config = {
     entry: {
     main: [
-      "bx-utils",
-      "bx-ui",      
+      
       './src/index.tsx'
     ],
     vendor: [
@@ -19,7 +18,12 @@ var config = {
       'react-redux',
       'react-router',
       'redux',
+      'history',
       'styled-components',
+    ],
+    bx: [
+      "bx-utils",
+      "bx-ui",
     ],
     polifil: [ 
       "dialog-polyfill",
@@ -56,10 +60,13 @@ var config = {
       }
     ]
   },
+  optimization: {
+    // splitChunks: {name: 'main', chunks: 'all'}
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
   ],
 
    node: {
