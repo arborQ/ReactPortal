@@ -20,7 +20,7 @@ class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> 
                         <Route exact
                             path="/"
                             component={AsyncComponent(
-                                () => import("./home.component").then((module) => module.default))}
+                                () => System.import("./home.component").then((module) => module.default))}
                         />
                         <Route path={AuthorizeUrl} component={AuthorizeComponent} />
                         <Route path={UsersUrl} component={UsersListComponent} />
