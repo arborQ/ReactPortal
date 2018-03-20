@@ -9,22 +9,21 @@ var sourcePath = path.join(__dirname, './src');
 var config = {
     entry: {
     main: [
-      
       './src/index.tsx'
     ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'redux',
-      'history',
-      'styled-components',
-    ],
-    bx: [
-      "bx-utils",
-      "bx-ui",
-    ],
+    // vendor: [
+    //   'react',
+    //   'react-dom',
+    //   'react-redux',
+    //   'react-router',
+    //   'redux',
+    //   'history',
+    //   'styled-components',
+    // ],
+    // bx: [
+    //   "bx-utils",
+    //   "bx-ui",
+    // ],
     polifil: [ 
       "dialog-polyfill",
     ]
@@ -61,9 +60,26 @@ var config = {
     ]
   },
   optimization: {
-    // splitChunks: {name: 'main', chunks: 'all'}
+     splitChunks: { chunks: 'all' }
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: sourcePath,
+        postcss: [
+          require('postcss-import')({
+            addDependencyTo: webpack
+          }),
+          require('postcss-url')(),
+          require('postcss-cssnext')(),
+          require('postcss-reporter')(),
+          require('postcss-browser-reporter')({
+            disabled: false
+          }),
+        ]
+      }
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
