@@ -23,4 +23,5 @@ var server = new webpackDevServer(compiler, {
     "/socket.io" : proxy
   }
 });
+console.log('Webpack dev server listen: 8080');
 server.listen(8080);

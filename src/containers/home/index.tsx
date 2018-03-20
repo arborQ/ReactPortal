@@ -14,13 +14,12 @@ class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> 
     render() {
         return (
             <div>
-                <Header {...this.props} />
+                <Header {...(this.props as any)} />
                 <div style={{ paddingTop: 10 }}>
                     <Switch>
                         <Route exact
                             path="/"
-                            component={AsyncComponent(
-                                () => System.import("./home.component").then((module) => module.default))}
+                            component={ AsyncComponent(async () => (await System.import("./home.component")).default) }
                         />
                         <Route path={AuthorizeUrl} component={AuthorizeComponent} />
                         <Route path={UsersUrl} component={UsersListComponent} />
