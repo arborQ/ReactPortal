@@ -10,6 +10,7 @@ import { Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
+import { createFormElement } from "./form";
 import { IAuthorizeStoreState } from "./store";
 
 interface ILoginDataProps {
@@ -43,6 +44,8 @@ interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponent
     },
 )
 export default class LoginContainer extends StateComponent<ILoginProps, ILoginState> {
+
+    private form = createFormElement<ILoginState>(this.state, (m) => m);
     constructor() {
         super({ login: "", password: "" });
     }
