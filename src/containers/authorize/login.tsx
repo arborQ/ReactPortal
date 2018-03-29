@@ -6,7 +6,7 @@ import {
     InputComponent,
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
-import { Validator } from "bx-utils";
+import { Form, Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
@@ -67,6 +67,8 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
             });
     }
 
+
+
     render() {
 
         const fieldValidator = new Validator.Combine([
@@ -97,15 +99,36 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
             },
         ];
 
+        const model: Form.FormComponent<ILoginState> = {
+            login: { state: this.state.login, validators: [(login) => "login"] },
+            password: { state: this.state.password, validators: [(password) => "login"] },
+        };
+
         return (
             <CardComponent size={400} title={"Log in"} subTitle={"Please provide credentials"}>
-                <FormComponent submit={this.submit.bind(this)}>
-                    {
-                        inputs.map((input: Ui.Input.IProps, i: number) => <InputComponent key={i} {...input} />)
-                    }
-                    <ButtonComponent label="Save" />
-                </FormComponent>
+                {Form.RenderForm<ILoginState>({
+                    render: this.renderForm,
+                    onSubmit: (m) => { /* */ },
+                    model,
+                })}
             </CardComponent>
+        );
+    }
+
+    private renderForm(model: Form.FormComponent<ILoginState>): JSX.Element {
+        return (
+            <div>
+                <InputComponent
+                    label={"Login" + model.login.validators}
+                    value={model.login.state || ""}
+                    change={(value) => { model.login.state = value; }} />
+                <InputComponent
+                    isPassword={true}
+                    label="Password"
+                    value={model.password.state || ""}
+                    change={(value) => { model.password.state = value; }} />
+                <ButtonComponent label="Login" />
+            </div>
         );
     }
 }

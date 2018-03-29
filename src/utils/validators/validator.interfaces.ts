@@ -3,8 +3,6 @@ export interface IValidationResult {
     messages?: string[];
 }
 
-// export type IValidator<T> = (value: T) => Promise<IValidationResult>;
-
 export interface IValidator<T> {
     validate(model: T): Promise<IValidationResult>;
 }

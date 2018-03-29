@@ -4,6 +4,7 @@ import ApiComponent from "./apiComponent";
 import Assign from "./assign";
 import AsyncComponent from "./asyncComponent";
 import Clone from "./clone";
+import * as Form from "./form";
 import StateComponent from "./stateComponent";
 import * as Validator from "./validators";
 
@@ -27,5 +28,6 @@ export {
     StateComponent,
     Clone,
     Validator,
+    Form,
     debounce as Debounce,
 };
