@@ -3,7 +3,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 var webpack = require('webpack'); //to access built-in plugins
 var path = require('path');
-var outPath = path.join(__dirname, './dist');
+var outPath = path.join(__dirname, './public');
 var sourcePath = path.join(__dirname, './src');
 
 var config = {

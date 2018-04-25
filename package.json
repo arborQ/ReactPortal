@@ -7,6 +7,7 @@
     "start": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
     "build": "webpack-cli -p --progress --colors",
+    "deploy": "firebase deploy",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
     "validate": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",

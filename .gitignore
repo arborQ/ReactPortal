@@ -5,4 +5,4 @@ screenshots
 .module-cache
 *.log*
 build
-dist
+public
