@@ -31,7 +31,14 @@ interface ILoginActionProps {
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
 
-firebase.initializeApp({}, "reactportal");
+const app = firebase.initializeApp({
+    apiKey: "AIzaSyDYsTvG2uKUZO-cLinGa0V2plqIVyaDU9c",
+    authDomain: "reactportal.firebaseapp.com",
+    databaseURL: "https://reactportal.firebaseio.com",
+    projectId: "reactportal",
+    storageBucket: "reactportal.appspot.com",
+    messagingSenderId: "616442721992",
+  });
 
 @connect((store: IAuthorizeStoreState, b) => {
     const { user } = store;
@@ -63,11 +70,12 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
     }
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-        return firebase.auth()
+        return app.auth()
             .signInWithEmailAndPassword(this.state.login, this.state.password)
             .then((result) => {
                 /* */
-            }).catch(() => {
+            }).catch((err) => {
+                console.log(err);
                 alert("error");
             });
     }
