@@ -7,6 +7,8 @@ import {
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
@@ -28,6 +30,8 @@ interface ILoginActionProps {
 
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
+
+firebase.initializeApp({}, "reactportal");
 
 @connect((store: IAuthorizeStoreState, b) => {
     const { user } = store;
@@ -59,16 +63,16 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
     }
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-        return ajax
-            .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
-            .then((res: any) => {
-                this.props.changeLogin(res.user);
-                this.props.history.push("/users/list");
+        return firebase.auth()
+            .signInWithEmailAndPassword(this.state.login, this.state.password)
+            .then((result) => {
+                /* */
+            }).catch(() => {
+                alert("error");
             });
     }
 
-    render() {
-
+    render(): JSX.Element {
         const fieldValidator = new Validator.Combine([
             new Validator.StringRequired(),
             new Validator.StringLength(1),
