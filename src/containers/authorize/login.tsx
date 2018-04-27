@@ -7,8 +7,6 @@ import {
 } from "bx-ui";
 import { ajax, StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
-import * as firebase from "firebase/app";
-import "firebase/auth";
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
@@ -30,15 +28,6 @@ interface ILoginActionProps {
 
 interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
 }
-
-const app = firebase.initializeApp({
-    apiKey: "AIzaSyDYsTvG2uKUZO-cLinGa0V2plqIVyaDU9c",
-    authDomain: "reactportal.firebaseapp.com",
-    databaseURL: "https://reactportal.firebaseio.com",
-    projectId: "reactportal",
-    storageBucket: "reactportal.appspot.com",
-    messagingSenderId: "616442721992",
-  });
 
 @connect((store: IAuthorizeStoreState, b) => {
     const { user } = store;
