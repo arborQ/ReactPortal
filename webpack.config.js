@@ -7,7 +7,7 @@ var outPath = path.join(__dirname, './public');
 var sourcePath = path.join(__dirname, './src');
 
 var config = {
-    entry: {
+  entry: {
     main: [
       './src/index.tsx'
     ],
@@ -24,7 +24,7 @@ var config = {
     //   "bx-utils",
     //   "bx-ui",
     // ],
-    polifil: [ 
+    polifil: [
       "dialog-polyfill",
     ]
   },
@@ -40,7 +40,8 @@ var config = {
     mainFields: ['main'],
     alias: {
       'bx-ui': path.resolve(__dirname, './src/ui/material'),
-      "bx-utils": path.resolve(__dirname, './src/utils')
+      "bx-utils": path.resolve(__dirname, './src/utils'),
+      "bx-services": path.resolve(__dirname, "./src/services/index.ts")
     }
   },
   mode: 'development',
@@ -52,15 +53,15 @@ var config = {
     },
   },
   module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'awesome-typescript-loader'
-      }
-    ]
+    rules: [{
+      test: /\.tsx?$/,
+      use: 'awesome-typescript-loader'
+    }]
   },
   optimization: {
-     splitChunks: { chunks: 'all' }
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -85,7 +86,7 @@ var config = {
     }),
   ],
 
-   node: {
+  node: {
     fs: 'empty',
     net: 'empty'
   }

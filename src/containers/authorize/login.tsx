@@ -1,3 +1,4 @@
+import { authorizeService } from "bx-services";
 import {
     ButtonComponent,
     CardComponent,
@@ -59,16 +60,17 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
     }
 
     submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-        return app.auth()
-            .signInWithEmailAndPassword(this.state.login, this.state.password)
-            .then((result) => {
-                /* */
-            }).catch((err) => {
-                alert("error");
-            });
+        return authorizeService.login(this.state.login, this.state.password);
+        // return ajax
+        //     .post("/api/authentication/login", { login: this.state.login, password: this.state.password })
+        //     .then((res: any) => {
+        //         this.props.changeLogin(res.user);
+        //         this.props.history.push("/users/list");
+        //     });
     }
 
-    render(): JSX.Element {
+    render() {
+
         const fieldValidator = new Validator.Combine([
             new Validator.StringRequired(),
             new Validator.StringLength(1),

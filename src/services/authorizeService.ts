@@ -8,7 +8,7 @@ export default class AuthorizeService {
 
     login(login: string, password: string): Promise<void> {
         return new Promise<void>((resolve) => {
-            this.firebaseApp.auth().createUserWithEmailAndPassword(login, password).then((result) => {
+            this.firebaseApp.auth().signInWithEmailAndPassword(login, password).then((result) => {
                 console.log(result);
                 resolve();
             });

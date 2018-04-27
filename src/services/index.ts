@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import authorizeService from "./authorizeService";
+import AuthorizeService from "./authorizeService";
 
 const app = initializeApp({
     apiKey: "AIzaSyDYsTvG2uKUZO-cLinGa0V2plqIVyaDU9c",
@@ -10,6 +10,4 @@ const app = initializeApp({
     messagingSenderId: "616442721992",
 });
 
-export default {
-    authorizeService : new authorizeService(app),
-};
+export const authorizeService = new AuthorizeService(app);
