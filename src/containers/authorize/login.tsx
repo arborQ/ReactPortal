@@ -75,7 +75,6 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
             .then((result) => {
                 /* */
             }).catch((err) => {
-                console.log(err);
                 alert("error");
             });
     }
