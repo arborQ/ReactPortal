@@ -7,15 +7,24 @@ export default class AuthorizeService {
     }
 
     login(login: string, password: string): Promise<void> {
-        return new Promise<void>((resolve) => {
-            return this.firebaseApp.auth().signInWithEmailAndPassword(login, password);
-        });
+        return this.firebaseApp.auth().signInWithEmailAndPassword(login, password);
     }
 
-    statusChanged(action: (currentUser: Services.Authorize.IUser) => void): void {
-       this.firebaseApp.auth().onAuthStateChanged((user) => {
-           const bxUser: Services.Authorize.IUser = {};
-           action(bxUser);
-       });
+    logout(): Promise<void> {
+        return this.firebaseApp.auth().signOut();
+    }
+
+    statusChanged(action: (currentUser: Services.Authorize.IUser | null) => void): void {
+        this.firebaseApp.auth().onAuthStateChanged((user: any) => {
+            if (!!user) {
+                const bxUser: Services.Authorize.IUser = {
+                    email: user.email, login: user.displayName, uid: user.uid,
+                };
+
+                action(bxUser);
+            } else {
+                action(null);
+            }
+        });
     }
 }

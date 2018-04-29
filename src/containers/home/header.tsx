@@ -3,7 +3,8 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import styled from "styled-components";
 
-import { Link, NavLink} from "react-router-dom";
+import { authorizeService } from "bx-services";
+import { Link, NavLink } from "react-router-dom";
 import { ChangePasswordUrl, LoginUrl } from "../authorize";
 
 const Header = styled.header`
@@ -26,28 +27,59 @@ const Header = styled.header`
     }
 `;
 
-const headerComponent: React.StatelessComponent<RouteComponentProps<any>> = (p: RouteComponentProps<any>) => {
-    const { pathname } = p.location;
+class HeaderComponent extends React.Component<RouteComponentProps<any>, { isAuthorized: boolean }> {
+    constructor() {
+        super();
+        this.state = { isAuthorized: false };
+    }
 
-    const paths = [
-        { path: "/", label: "Home" },
-        { path: LoginUrl, label: "Login" },
-        { path: ChangePasswordUrl, label: "Change password" },
-        { path: "/users", label: "Users" },
-        { path: "/products", label: "Products" },
-    ];
+    componentWillMount() {
+        authorizeService.statusChanged((user) => {
+            this.setState({
+                ...this.state,
+                ...{ isAuthorized: !!user && !!user.uid },
+            });
+        });
+    }
 
-    return (
-    <Header>
-        { paths
-            .map((element: any) =>
-            <Link
-                className={ pathname === element.path ? "active" : "" }
-                key={ element.path }
-                to={ element.path }>
-                    { element.label }
-            </Link> ) }
-    </Header>);
-};
+    render(): JSX.Element {
+        const { pathname } = this.props.location;
 
-export default headerComponent;
+        let paths = [
+            { path: "/", label: "Home" },
+        ];
+
+        if (this.state.isAuthorized) {
+            paths = [
+                ...paths,
+                ...[
+                    { path: ChangePasswordUrl, label: "Change password" },
+                    { path: "/users", label: "Users" },
+                    { path: "/products", label: "Products" },
+                ],
+            ];
+        } else {
+            paths = [
+                ...paths,
+                ...[
+                    { path: LoginUrl, label: "Login" },
+                ],
+            ];
+        }
+
+        return (
+            <Header>
+                {paths
+                    .map((element: any) =>
+                        <Link
+                            className={pathname === element.path ? "active" : ""}
+                            key={element.path}
+                            to={element.path}>
+                            {element.label}
+                        </Link>)}
+                {this.state.isAuthorized ? <a onClick={() => { authorizeService.logout(); }}>Log out</a> : null}
+            </Header>);
+    }
+}
+
+export default HeaderComponent;
