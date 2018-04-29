@@ -1,3 +1,4 @@
+import { temperatureService } from "bx-services";
 import {
     AnchorComponent,
     ButtonComponent,
@@ -12,19 +13,6 @@ import { Route, RouteComponentProps, Router, RouterProps } from "react-router";
 import { Link } from "react-router-dom";
 import UserAddComponent from "./user.add";
 
-@connect((store: Application.Users.IUserStoreState, b) => {
-    const { users } = store;
-    return {
-    };
-},
-    (dispach: any) => {
-        return {
-            changeLogin(login: string) {
-                dispach({ type: "change_login", login });
-            },
-        };
-    },
-)
 export default class UserListContainer
     extends StateComponent<RouteComponentProps<{}>, Application.Users.IUserStoreState> {
 
@@ -58,9 +46,12 @@ export default class UserListContainer
         };
     }
     componentWillMount() {
-        ajax.get("/api/users").then((data) => {
-            console.log(data);
+        temperatureService.list().then(() => {
+            /* */
         });
+        // ajax.get("/api/users").then((data) => {
+        //     console.log(data);
+        // });
     }
     render() {
         const data: Application.Users.IUser[] = [

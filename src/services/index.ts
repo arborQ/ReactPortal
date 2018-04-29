@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import AuthorizeService from "./authorizeService";
+import AuthorizeService from "./authorize.service";
+import TemperatureService from "./temperature.service";
 
 const app = initializeApp({
     apiKey: "AIzaSyDYsTvG2uKUZO-cLinGa0V2plqIVyaDU9c",
@@ -11,3 +12,4 @@ const app = initializeApp({
 });
 
 export const authorizeService = new AuthorizeService(app);
+export const temperatureService = new TemperatureService(app);
