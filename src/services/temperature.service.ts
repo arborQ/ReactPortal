@@ -1,5 +1,5 @@
 import * as firebase from "firebase/app";
-import "firebase/database";
+import "firebase/firestore";
 
 export default class UsersService {
   constructor(private firebaseApp: firebase.app.App) {
@@ -7,12 +7,13 @@ export default class UsersService {
   }
 
   list(): Promise<any[]> {
-    const items = firebase.database().ref("temperature").orderByChild("date");
+    return firebase.firestore().collection("temperature").get().then(snap => snap.forEach(;
+    // const items = firebase.database().ref("temperature").orderByChild("date");
 
-    return items.once("value").then((snapshot) => {
-      console.log("snap", snapshot);
-      return snapshot.val();
-    });
+    // return items.once("value").then((snapshot) => {
+    //   console.log("snap", snapshot);
+    //   return snapshot.val();
+    // });
   }
 
   add(newRecord: Services.Temperature.ITemperature): Promise<Services.Temperature.ITemperature> {
