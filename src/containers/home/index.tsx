@@ -5,12 +5,19 @@ import { Route, RouteComponentProps, Router, Switch, withRouter } from "react-ro
 import * as X from "react-router-dom";
 import Header from "./header";
 
+import { authorizeService } from "bx-services";
 import { AuthorizeComponent, AuthorizeUrl } from "../authorize";
 import { UsersListComponent, UsersUrl } from "../users";
 
 import IndexComponent from "../indexComponent";
 
 class HomeContainer extends React.Component<RouteComponentProps<any> | any, {}> {
+    componentWillMount() {
+        authorizeService.statusChanged(() => {
+            alert("change");
+        });
+    }
+
     render() {
         return (
             <div>

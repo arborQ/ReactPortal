@@ -8,16 +8,14 @@ export default class AuthorizeService {
 
     login(login: string, password: string): Promise<void> {
         return new Promise<void>((resolve) => {
-            this.firebaseApp.auth().signInWithEmailAndPassword(login, password).then((result) => {
-                console.log(result);
-                resolve();
-            });
+            return this.firebaseApp.auth().signInWithEmailAndPassword(login, password);
         });
     }
 
-    statusChanged(action: () => void): void {
+    statusChanged(action: (currentUser: Services.Authorize.IUser) => void): void {
        this.firebaseApp.auth().onAuthStateChanged((user) => {
-           action();
+           const bxUser: Services.Authorize.IUser = {};
+           action(bxUser);
        });
     }
 }
