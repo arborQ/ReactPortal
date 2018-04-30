@@ -1,5 +1,5 @@
 import * as firebase from "firebase/app";
-import "firebase/firestore";
+// import "firebase/firestore";
 
 export default class UsersService {
   constructor(private firebaseApp: firebase.app.App) {
@@ -7,7 +7,8 @@ export default class UsersService {
   }
 
   list(): Promise<any[]> {
-    return firebase.firestore().collection("temperature").get().then(snap => snap.forEach(;
+    return Promise.resolve([]);
+    // return firebase.firestore().collection("temperature").get().then(snap => snap.forEach(;
     // const items = firebase.database().ref("temperature").orderByChild("date");
 
     // return items.once("value").then((snapshot) => {
