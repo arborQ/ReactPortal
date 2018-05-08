@@ -7,7 +7,7 @@
     "start": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
     "build": "webpack-cli -p --progress --colors",
-    "serve": "concurrently --kill-others \"webpack-cli --watch\" \"firebase serve\"",
+    "serve": "concurrently --kill-others \"webpack-cli --watch\" \"firebase serve -p 8080\"",
     "deploy": "firebase deploy",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
@@ -66,7 +66,7 @@
     "tslint-loader": "3.5.3",
     "typescript": "^2.8.3",
     "url-loader": "^1.0.1",
-    "webpack": "^4.1.1",
+    "webpack": "^4.8.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
     "webpack-hot-middleware": "2.18.0"
