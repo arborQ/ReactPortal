@@ -88,7 +88,8 @@ var config = {
 
   node: {
     fs: 'empty',
-    net: 'empty'
+    net: 'empty',
+    tls: 'empty'
   }
 };
 

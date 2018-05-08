@@ -8,7 +8,7 @@
     "mock": "node ./bin/mock.server.js",
     "build": "webpack-cli -p --progress --colors",
     "serve": "concurrently --kill-others \"webpack-cli --watch\" \"firebase serve -p 8080\"",
-    "deploy": "firebase deploy",
+    "deploy": "webpack-cli -p --progress --colors && firebase deploy",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
     "validate": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
