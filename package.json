@@ -81,5 +81,8 @@
     "react-router": "4.2.0",
     "redux": "3.7.2",
     "redux-actions": "2.0.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/arborQ/ReactPortal.git",
+  "author": "Łukasz Wójcik <arbor@o2.pl>"
 }

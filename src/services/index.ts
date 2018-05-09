@@ -1,3 +1,4 @@
+import "@firebase/database/dist/index.cjs";
 import { initializeApp } from "firebase/app";
 import AuthorizeService from "./authorize.service";
 import TemperatureService from "./temperature.service";

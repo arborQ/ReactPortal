@@ -1,5 +1,5 @@
+import "@firebase/auth";
 import * as firebase from "firebase/app";
-import "firebase/auth";
 
 export default class AuthorizeService {
     private auth: firebase.auth.Auth;
