@@ -11,19 +11,19 @@ var config = {
     main: [
       './src/index.tsx'
     ],
-    // vendor: [
-    //   'react',
-    //   'react-dom',
-    //   'react-redux',
-    //   'react-router',
-    //   'redux',
-    //   'history',
-    //   'styled-components',
-    // ],
-    // bx: [
-    //   "bx-utils",
-    //   "bx-ui",
-    // ],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'history',
+      'styled-components',
+    ],
+    bx: [
+      "bx-utils",
+      "bx-ui",
+    ],
     polifil: [
       "dialog-polyfill",
     ]
@@ -59,8 +59,16 @@ var config = {
     }]
   },
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all'
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          enforce: true,
+          chunks: 'all'
+        }
+      }
     }
   },
   plugins: [
