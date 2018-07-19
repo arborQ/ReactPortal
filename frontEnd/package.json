@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/classnames": "0.0.32",
     "@types/enzyme": "2.8.9",
+    "@types/express": "^4.16.0",
     "@types/firebase": "^3.2.1",
     "@types/history": "4.5.0",
     "@types/jest": "21.1.1",
@@ -77,8 +78,6 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
-    "express": "^4.16.3",
-    "mdbootstrap": "4.4.1",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-redux": "5.0.6",
