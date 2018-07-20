@@ -12,6 +12,8 @@ namespace core
 {
     public class Program
     {
+        public static int ApplicationPort => 8011;
+
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
@@ -19,6 +21,7 @@ namespace core
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:" + ApplicationPort)
                 .UseStartup<Startup>();
     }
 }
