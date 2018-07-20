@@ -1,8 +1,8 @@
 FROM microsoft/dotnet:sdk AS build-env
-WORKDIR ./
+WORKDIR /core
 
 # Copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY ./core/core.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
@@ -11,6 +11,6 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /out .
+WORKDIR /core
+COPY --from=build-env /core/out .
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
