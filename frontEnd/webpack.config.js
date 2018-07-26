@@ -31,8 +31,8 @@ var config = {
   output: {
     path: outPath,
     publicPath: '/',
-    filename: '[name].bundle.js?_=[chunkhash]',
-    chunkFilename: '[id].chunk.js?_=[chunkhash]'
+    filename: '[name].bundle.[chunkhash].js',
+    chunkFilename: '[id].chunk.[chunkhash].js'
 
   },
   resolve: {
