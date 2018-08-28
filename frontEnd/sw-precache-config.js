@@ -3,6 +3,7 @@ module.exports = {
         'public/**.js',
         'public/index.html'
     ],
+    navigateFallback: '/index.html',
     stripPrefix: 'public/',
     runtimeCaching: [{
         urlPattern: "/express/style/path/(.*)",
