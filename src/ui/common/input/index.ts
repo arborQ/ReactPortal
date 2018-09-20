@@ -2,11 +2,12 @@ import { Message } from "_debugger";
 import { Validator } from "bx-utils";
 import * as React from "react";
 
-export default abstract class InputComponent extends React.Component<Ui.Input.IProps, Ui.Input.IState> {
+export default abstract class InputComponent extends React.PureComponent<Ui.Input.IProps, Ui.Input.IState> {
   constructor() {
     super();
-    this.state = { value: "", isValid: true, working: false };
+    this.state = { value: "   ", isValid: true, working: false };
   }
+  
   componentDidMount() {
     this.updateParent(this.props.value, true);
   }
