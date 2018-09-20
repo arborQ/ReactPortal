@@ -1,16 +1,17 @@
-FROM microsoft/dotnet:sdk AS build-env
-WORKDIR /core
+FROM node:8
 
-# Copy csproj and restore as distinct layers
-COPY ./core/core.csproj ./
-RUN dotnet restore
+# Create app directory
+WORKDIR /usr/src/app
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /core
-COPY --from=build-env /core/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+RUN npm install
+RUN npm run build
+
+COPY . .
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
