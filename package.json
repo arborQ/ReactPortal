@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
-    "build": "rd public /s /q && webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose",
+    "build": "webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose",
     "sw": "sw-precache --root=public --config=./sw-precache-config.js --verbose",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
@@ -34,7 +34,7 @@
     "@types/systemjs": "0.20.2",
     "@types/webpack": "^4.4.13",
     "@types/webpack-env": "1.13.0",
-    "awesome-typescript-loader": "^5.0.0-1",
+    "awesome-typescript-loader": "^5.2.1",
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
     "dialog-polyfill": "^0.4.9",
