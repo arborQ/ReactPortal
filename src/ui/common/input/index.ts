@@ -1,4 +1,3 @@
-import { Validator } from "bx-utils";
 import * as React from "react";
 
 export default abstract class InputComponent extends React.PureComponent<Ui.Input.IProps, Ui.Input.IState> {
@@ -21,7 +20,7 @@ export default abstract class InputComponent extends React.PureComponent<Ui.Inpu
       this.props.validator.validate(value)
         .then((result) => {
           this.setState(Object.assign(this.state, { isValid: true, working: false, messages: [] }));
-        }).catch((result: Validator.ValidatorInterfaces.IValidationResult) => {
+        }).catch((result: Utils.Validation.IValidationResult) => {
           this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [ result.messages ] }));
         });
     }

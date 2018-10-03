@@ -1,4 +1,4 @@
-export class Form<TModel> {
+export class FormService<TModel> {
   getModel(): TModel {
     return {} as TModel;
   }

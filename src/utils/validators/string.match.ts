@@ -1,4 +1,3 @@
-import { IValidationResult, IValidator, ValidationHelper } from "./validator.interfaces";
 import ValueMatchValidation from "./value.match";
 
 export default class StringMatchValidation extends ValueMatchValidation<string> {

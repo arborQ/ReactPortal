@@ -1,9 +1,10 @@
-import { IValidationResult, IValidator, ValidationHelper } from "./validator.interfaces";
+import { ValidationHelper } from "./validator.helper";
 
-export default class ValueMatchValidation<T> implements IValidator<T> {
-    constructor(private resolver: () => T, private equals?: (a: T, b: T) => boolean) {}
+export default class ValueMatchValidation<T extends Utils.Validation.Validatable>
+    implements Utils.Validation.IValidator<T> {
+    constructor(private resolver: () => T, private equals?: (a: T, b: T) => boolean) { }
 
-    validate(value: T): Promise<IValidationResult> {
+    validate(value: T): Promise<Utils.Validation.IValidationResult> {
         const compareValue = this.resolver();
         const equalFunction = this.equals || this.defaultEqual;
 
