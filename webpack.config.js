@@ -73,7 +73,6 @@ var config = {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
-          chunks: 'initial'
         },
         default: {
           minChunks: 2,
