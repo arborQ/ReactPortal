@@ -10,7 +10,7 @@ import * as io from "socket.io-client";
 //     });
 //   });
 
-type IUserStoreState = Application.Users.IUserStoreState;
+type IUserStoreState = Containers.Users.IUserStoreState;
 
 export default createStore<IUserStoreState>(combineReducers({
     user: (s: IUserStoreState = { users: [] }, a: any): IUserStoreState => {

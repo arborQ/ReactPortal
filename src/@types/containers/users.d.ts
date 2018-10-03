@@ -1,4 +1,4 @@
-declare namespace Application.Users {
+declare namespace Containers.Users {
     export interface IUserStoreState {
         users: IUser[];
     }

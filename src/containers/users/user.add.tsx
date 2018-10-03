@@ -11,7 +11,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, Router, RouterProps } from "react-router";
 
-@connect((store: Application.Users.IUserStoreState, b) => {
+@connect((store: Containers.Users.IUserStoreState, b) => {
     const { users } = store;
     return {
     };
@@ -24,7 +24,7 @@ import { RouteComponentProps, Router, RouterProps } from "react-router";
         };
     },
 )
-export default class UserAddContainer extends StateComponent<RouteComponentProps<{}>, Application.Users.IUser> {
+export default class UserAddContainer extends StateComponent<RouteComponentProps<{}>, Containers.Users.IUser> {
 
     addSchema: { [key: string]: string } = {
         firstName: "",
