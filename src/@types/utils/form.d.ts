@@ -5,6 +5,8 @@ declare namespace Utils.Forms {
         onValidationError: (errorMessages: string[]) => void;
         isValueValid: boolean;
         isValueChanged: boolean;
+        htmlProps?: React.InputHTMLAttributes<HTMLInputElement>;
+        uiProps?: Partial<Ui.Input.IProps>;
     }
 
     export type ValueChangeAction<T> = (newValue: T) => Promise<T> | void;

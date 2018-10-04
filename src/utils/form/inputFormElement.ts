@@ -1,6 +1,7 @@
 import { SelectMany } from "bx-utils";
 
-export class InputFormElement implements Utils.Forms.IFormElement<string> {
+export default class InputFormElement
+  implements Utils.Forms.IFormElement<string> {
   isValueValid: boolean;
   isValueChanged: boolean;
   validators: Array<Utils.Validation.IValidator<string>>;
@@ -40,6 +41,14 @@ export class InputFormElement implements Utils.Forms.IFormElement<string> {
       onChange: e => {
         const currentValue = e.currentTarget.value;
         this.valueChange(currentValue);
+      }
+    };
+  }
+
+  get uiProps(): Partial<Ui.Input.IProps> {
+    return {
+      change: (currentValue: string) => {
+        return this.valueChange(currentValue);
       }
     };
   }

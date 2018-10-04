@@ -7,6 +7,8 @@ import Clone from "./clone";
 import SelectMany from "./selectMany";
 import StateComponent from "./stateComponent";
 import * as Validator from "./validators";
+import { FormService } from "./form";
+import InputFormElement from "./form/inputFormElement";
 
 function debounce(func: () => void, wait: number): () => void {
     let timeout: NodeJS.Timer | null = null;
@@ -29,5 +31,7 @@ export {
     SelectMany,
     Clone,
     Validator,
+    FormService,
+    InputFormElement,
     debounce as Debounce,
 };

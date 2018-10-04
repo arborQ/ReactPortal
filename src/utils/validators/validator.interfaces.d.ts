@@ -1,5 +1,5 @@
 declare namespace Utils.Validation {
-    export type Validatable = string | number | boolean | Date;
+    export type Validatable = string | number | boolean | Date | object;
     export interface IValidationResult {
         isValid: boolean;
         message: string;
