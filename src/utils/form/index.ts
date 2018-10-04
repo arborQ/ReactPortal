@@ -1,4 +1,6 @@
-export type FormFields<TModel> = { [P in keyof TModel]: Utils.Forms.IFormElement };
+export type FormFields<TModel> = {
+  [P in keyof TModel]: Utils.Forms.IFormElement
+};
 
 export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
   get isValueValid(): boolean {
@@ -40,7 +42,7 @@ export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
       if (itemRule !== undefined) {
         this.items[item] = {
           ...(itemRule as any),
-          onValueChange: (v) => {
+          onValueChange: v => {
             // this.value[item] = v;
             itemRule.onValueChange(v);
             this.onValueChange(this.value);
@@ -48,6 +50,9 @@ export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
         };
       }
     }
+  }
+  changeAction(model: TModel): void | Promise<TModel> {
+    console.log("i don't care");
   }
 
   get isValid(): boolean {

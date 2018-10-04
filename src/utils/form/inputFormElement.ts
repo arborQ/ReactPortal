@@ -7,7 +7,6 @@ export default class InputFormElement
   validators: Array<Utils.Validation.IValidator<string>>;
 
   constructor(
-    public value: string,
     public onValueChange: Utils.Forms.ValueChangeAction<string>,
     public onValidationError: (errorMessages: string[]) => void,
     ...validators: Array<Utils.Validation.IValidator<string>>
@@ -17,7 +16,7 @@ export default class InputFormElement
     this.validators = validators;
   }
 
-  private valueChange(currentValue: string): void {
+  public valueChange(currentValue: string): void {
     this.isValueChanged = false;
     Promise.all(this.validators.map(v => v.validate(currentValue))).then(
       results => {
@@ -26,7 +25,6 @@ export default class InputFormElement
 
         if (this.isValueValid) {
           this.onValueChange(currentValue);
-          this.value = currentValue;
         } else {
           const messages = SelectMany(invalidReults, r => r.message);
           this.onValidationError(messages);
@@ -35,21 +33,7 @@ export default class InputFormElement
     );
   }
 
-  get htmlProps(): React.InputHTMLAttributes<HTMLInputElement> {
-    return {
-      value: this.value,
-      onChange: e => {
-        const currentValue = e.currentTarget.value;
-        this.valueChange(currentValue);
-      }
-    };
-  }
-
-  get uiProps(): Partial<Ui.Input.IProps> {
-    return {
-      change: (currentValue: string) => {
-        return this.valueChange(currentValue);
-      }
-    };
+  public changeAction(model: string) : void | Promise<string>{
+    /* */
   }
 }
