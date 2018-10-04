@@ -2,10 +2,10 @@ declare namespace Utils.Validation {
     export type Validatable = string | number | boolean | Date;
     export interface IValidationResult {
         isValid: boolean;
-        messages?: string[];
+        message: string;
     }
     
-    export interface IValidator<T extends Validatable | IValidator<Validatable>> {
+    export interface IValidator<T = Validatable | IValidator<Validatable>> {
         validate(model: T): Promise<IValidationResult>;
     }
 }

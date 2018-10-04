@@ -21,7 +21,7 @@ export default abstract class InputComponent extends React.PureComponent<Ui.Inpu
         .then((result) => {
           this.setState(Object.assign(this.state, { isValid: true, working: false, messages: [] }));
         }).catch((result: Utils.Validation.IValidationResult) => {
-          this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [ result.messages ] }));
+          this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [ result.message ] }));
         });
     }
   }

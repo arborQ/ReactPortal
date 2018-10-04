@@ -4,6 +4,7 @@ import ApiComponent from "./apiComponent";
 import Assign from "./assign";
 import AsyncComponent from "./asyncComponent";
 import Clone from "./clone";
+import SelectMany from "./selectMany";
 import StateComponent from "./stateComponent";
 import * as Validator from "./validators";
 
@@ -25,6 +26,7 @@ export {
     ApiComponent,
     AsyncComponent,
     StateComponent,
+    SelectMany,
     Clone,
     Validator,
     debounce as Debounce,

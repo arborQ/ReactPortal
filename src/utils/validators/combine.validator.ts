@@ -12,7 +12,7 @@ export default class CombineValidation<T extends Utils.Validation.Validatable>
                 return ValidationHelper.SuccessValidation();
             })
             .catch((result: Utils.Validation.IValidationResult) => {
-                return ValidationHelper.FailValidation((result.messages || []).join(" "));
+                return ValidationHelper.FailValidation(result.message);
             });
     }
 }
