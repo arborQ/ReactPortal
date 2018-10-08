@@ -7,7 +7,7 @@ var proxy = {
   "target": {
     "host": "localhost",
     "protocol": 'http',
-    "port": 8011
+    "port": 5000
   },
   onError: function() { console.log('error'); },
   secure: false

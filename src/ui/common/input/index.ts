@@ -7,7 +7,7 @@ export default abstract class InputComponent extends React.PureComponent<Ui.Inpu
   }
 
   componentDidMount() {
-    this.updateParent(this.props.value, true);
+    this.updateParent(this.props.value || "?", true);
   }
 
   updateParent(value: string, silent: boolean = false) {

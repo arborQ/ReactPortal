@@ -66,42 +66,39 @@ export default class LoginContainer extends StateComponent<ILoginProps, ILoginSt
             });
     }
 
+    private fieldValidator = new Validator.Combine([
+        new Validator.StringRequired(),
+        new Validator.StringLength(1),
+    ]);
+
+    private matchValidator = new Validator.Combine([
+        new Validator.StringRequired(),
+        new Validator.StringLength(1),
+    ]);
+
+    private inputForm: Utils.Common.IRemapModel<ILoginState, Ui.Input.IProps> = {
+        login: {
+            change: (login: string) => { this.updateState({ login }); },
+            label: "Login",
+            name: "login",
+            validator: this.fieldValidator,
+            value: "test"
+        },
+        password: {
+            change: (password: string) => { this.updateState({ password }); },
+            isPassword: true,
+            label: "Password",
+            name: "password",
+            validator: this.matchValidator,
+        }
+    }
+
     render() {
-
-        const fieldValidator = new Validator.Combine([
-            new Validator.StringRequired(),
-            new Validator.StringLength(1),
-        ]);
-
-        const matchValidator = new Validator.Combine([
-            new Validator.StringRequired(),
-            new Validator.StringLength(1),
-        ]);
-
-        const inputs: Ui.Input.IProps[] = [
-            {
-                change: (login: string) => { this.updateState({ login }); },
-                label: "Login",
-                name: "login",
-                validator: fieldValidator,
-                value: this.state.login,
-            },
-            {
-                change: (password: string) => { this.updateState({ password }); },
-                isPassword: true,
-                label: "Password",
-                name: "password",
-                validator: matchValidator,
-                value: this.state.password,
-            },
-        ];
-
         return (
             <CardComponent size={400} title={"Log in"} subTitle={"Please provide credentials"}>
                 <FormComponent submit={this.submit.bind(this)}>
-                    {
-                        inputs.map((input: Ui.Input.IProps, i: number) => <InputComponent key={i} {...input} />)
-                    }
+                    <InputComponent value={this.state.login}  {...this.inputForm.login} />
+                    <InputComponent {...this.inputForm.password} value={this.state.password} />
                     <ButtonComponent label="Save" />
                 </FormComponent>
             </CardComponent>
