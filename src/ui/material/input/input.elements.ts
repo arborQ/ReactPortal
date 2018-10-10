@@ -55,7 +55,8 @@ export const Label = styled.label`
     white-space: nowrap;
     text-align: left;
     transition: 0.2s linear;
-
+    padding: 4px 5px;
+    
     :after {
       background-color: ${Styles.colors.main};
       bottom: 20px;

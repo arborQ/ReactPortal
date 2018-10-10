@@ -1,22 +1,14 @@
 import { Assign } from "bx-utils";
 import { combineReducers, createStore } from "redux";
 
-export interface IAuthorizeUser {
-    login: string | null;
-    authorizedOn?: Date;
-}
-
-export interface IAuthorizeStoreState {
-    user: IAuthorizeUser;
-}
-
-export default createStore<IAuthorizeStoreState>(combineReducers({
-    user: (s: IAuthorizeUser = { login: null }, a: any): IAuthorizeUser => {
+export default createStore<Stores.Authorize.IAuthorizeStoreState>(combineReducers({
+    user: (s: Stores.Authorize.IAuthorizeUser = { login: null }, a: any): Stores.Authorize.IAuthorizeUser => {
         switch (a.type) {
             case "change_login":
-                return Assign(s, { login: a.login.trim(), authorizedOn: new Date() });
+                console.log("dispach", a.login);
+                return {...s, login: a.login };
             case "clear_login":
-                return Assign(s, { login: null, authorizedOn: null });
+                return { login: null };
         }
         return s;
     },

@@ -1,107 +1,133 @@
 import { authorizeService } from "bx-services";
 import {
-    ButtonComponent,
-    CardComponent,
-    FormComponent,
-    HeaderComponent,
-    InputComponent,
+  ButtonComponent,
+  CardComponent,
+  FormComponent,
+  InputComponent
 } from "bx-ui";
-import { ajax, StateComponent } from "bx-utils";
+import { StateComponent } from "bx-utils";
 import { Validator } from "bx-utils";
 import * as React from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps, Router, RouterProps } from "react-router";
-import { createFormElement } from "./form";
-import { IAuthorizeStoreState } from "./store";
-
-interface ILoginDataProps {
-    login: string;
-}
 
 interface ILoginState {
-    login: string;
-    password: string;
+  login: string;
+  password: string;
+  isAuthorized: boolean;
 }
 
-interface ILoginActionProps {
-    changeLogin(login: string): void;
+interface ILoginActionProps extends ILoginState {
+  changeLogin(login: string): void;
+  clearLogin(): void;
 }
 
-interface ILoginProps extends ILoginDataProps, ILoginActionProps, RouteComponentProps<any> {
-}
-
-@connect((store: IAuthorizeStoreState, b) => {
+@connect(
+  (store: Stores.Authorize.IAuthorizeStoreState): Partial<ILoginState> => {
     const { user } = store;
+
     return {
-        login: user.login,
+      isAuthorized: user.login !== null,
+      login: "from store"
     };
-},
-    (dispach: any) => {
-        return {
-            changeLogin(login: string) {
-                dispach({ type: "change_login", login });
-            },
-        };
-    },
+  },
+  (dispach: (event: any) => void) => {
+    return {
+      changeLogin(login: string): void {
+        dispach({ type: "change_login", login });
+      },
+      clearLogin(): void {
+        dispach({ type: "clear_login" });
+      }
+    };
+  }
 )
-export default class LoginContainer extends StateComponent<ILoginProps, ILoginState> {
+export default class LoginContainer extends StateComponent<
+  ILoginActionProps,
+  ILoginState
+> {
+  componentWillReceiveProps(nextProps: ILoginActionProps) {
+    this.updateState({
+      isAuthorized: nextProps.isAuthorized
+    });
+  }
 
-    private form = createFormElement<ILoginState>(this.state, (m) => m);
-    constructor() {
-        super({ login: "", password: "" });
+  componentDidMount() {
+    authorizeService.isAuthorized().then(success => {
+      if (success) {
+        this.props.changeLogin(this.state.login);
+      }
+    });
+  }
+
+  submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
+    return authorizeService
+      .login(this.state.login, this.state.password)
+      .then((res: any) => {
+        this.props.changeLogin(this.state.login);
+      });
+  }
+
+  private fieldValidator = new Validator.Combine([
+    new Validator.StringRequired(),
+    new Validator.StringLength(1)
+  ]);
+
+  private matchValidator = new Validator.Combine([
+    new Validator.StringRequired(),
+    new Validator.StringLength(1)
+  ]);
+
+  private inputForm: Utils.Common.IRemapModel<ILoginState, Ui.Input.IProps> = {
+    login: {
+      change: (login: string) => {
+        this.updateState({ login });
+      },
+      label: "Login",
+      name: "login",
+      validator: this.fieldValidator,
+      value: "test"
+    },
+    password: {
+      change: (password: string) => {
+        this.updateState({ password });
+      },
+      isPassword: true,
+      label: "Password",
+      name: "password",
+      validator: this.matchValidator
     }
+  };
 
-    componentDidMount() {
-        if (!!this.props.login) {
-            this.props.history.push("/users/list");
-        } else {
-            this.updateState({ login: this.props.login || "", password: "" });
-        }
-    }
-
-    submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-        return authorizeService.login(this.state.login, this.state.password)
-             .then((res: any) => {
-                this.props.history.push("/users/list");
-            });
-    }
-
-    private fieldValidator = new Validator.Combine([
-        new Validator.StringRequired(),
-        new Validator.StringLength(1),
-    ]);
-
-    private matchValidator = new Validator.Combine([
-        new Validator.StringRequired(),
-        new Validator.StringLength(1),
-    ]);
-
-    private inputForm: Utils.Common.IRemapModel<ILoginState, Ui.Input.IProps> = {
-        login: {
-            change: (login: string) => { this.updateState({ login }); },
-            label: "Login",
-            name: "login",
-            validator: this.fieldValidator,
-            value: "test"
-        },
-        password: {
-            change: (password: string) => { this.updateState({ password }); },
-            isPassword: true,
-            label: "Password",
-            name: "password",
-            validator: this.matchValidator,
-        }
-    }
-
-    render() {
-        return (
-            <CardComponent size={400} title={"Log in"} subTitle={"Please provide credentials"}>
-                <FormComponent submit={this.submit.bind(this)}>
-                    <InputComponent value={this.state.login}  {...this.inputForm.login} />
-                    <InputComponent {...this.inputForm.password} value={this.state.password} />
-                    <ButtonComponent label="Save" />
-                </FormComponent>
-            </CardComponent>
-        );
-    }
+  render() {
+    return (
+      <CardComponent
+        size={400}
+        title={"Log in"}
+        subTitle={"Please provide credentials"}
+      >
+        <FormComponent submit={this.submit.bind(this)}>
+          {this.inputForm.login == undefined ? null : (
+            <InputComponent
+              {...this.inputForm.login}
+              value={this.state.login}
+            />
+          )}
+          {this.inputForm.password == undefined ? null : (
+            <InputComponent
+              {...this.inputForm.password}
+              value={this.state.password}
+            />
+          )}
+          {this.state.isAuthorized ? (
+            <ButtonComponent
+              label={`Log out: ${this.state.login}`}
+              click={() => this.props.clearLogin()}
+            />
+          ) : (
+            <ButtonComponent label={`Save: ${this.state.login}`} />
+          )}
+        </FormComponent>
+      </CardComponent>
+    );
+  }
 }
