@@ -13,7 +13,7 @@ export default abstract class StateComponent<P, S> extends React.Component<P, S>
       if (!this.isComponentMounted) {
         reject();
       } else {
-        const calculatedState: S = assign(this.state, newState);
+        const calculatedState: S = Object.assign({}, this.state, newState);
         if (!this.stateWillChange(calculatedState)) {
           resolve(this.state);
         }

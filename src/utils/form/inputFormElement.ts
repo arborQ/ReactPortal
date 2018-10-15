@@ -16,7 +16,7 @@ export default class InputFormElement
     this.validators = validators;
   }
 
-  public valueChange(currentValue: string): void {
+  valueChange(currentValue: string): void {
     this.isValueChanged = false;
     Promise.all(this.validators.map(v => v.validate(currentValue))).then(
       results => {
@@ -33,7 +33,7 @@ export default class InputFormElement
     );
   }
 
-  public changeAction(model: string) : void | Promise<string>{
+  changeAction(model: string): void | Promise<string> {
     /* */
   }
 }

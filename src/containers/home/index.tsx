@@ -1,19 +1,15 @@
-import { AsyncComponent } from "bx-utils";
+import { AsyncComponent, AuthorizedComponent } from "bx-utils";
 import * as React from "react";
 import { Provider } from "react-redux";
-import {
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter
-} from "react-router";
+import { Route, RouteComponentProps, Switch, withRouter } from "react-router";
 import Header from "./header";
 
 import { AuthorizeComponent, AuthorizeUrl } from "../authorize";
 import { UsersListComponent, UsersUrl } from "../users";
 
+import store from "../../store";
+
 import IndexComponent from "../indexComponent";
-import store from "../authorize/store";
 
 class HomeContainer extends React.Component<
   RouteComponentProps<any> | any,

@@ -1,9 +1,9 @@
 import { Styles } from "bx-ui";
+import { StateComponent } from "bx-utils";
 import * as React from "react";
+import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { StateComponent } from "bx-utils";
 
 import { authorizeService } from "bx-services";
 import { Link, NavLink } from "react-router-dom";
@@ -15,8 +15,7 @@ const Header = styled.header`
   height: 50px;
   line-height: 50px;
   padding: 0 10px;
-  font-size: ${Styles.font.size}px;
-  font-family: ${Styles.font.family}, sans-serif;
+  font-size: 1em;
 
   a {
     padding: 0 10px;
@@ -29,30 +28,30 @@ const Header = styled.header`
   }
 `;
 
-interface IHeaderState {
+interface IHeaderState extends Services.Authorize.ISyncAuthorize {
   isAuthorized: boolean;
 }
 
-export interface IHeaderProps extends RouteComponentProps<any>, IHeaderState {
-    clearLogin(): void;
+export interface IHeaderProps extends RouteComponentProps<any>, IHeaderState, Services.Authorize.ISyncActions {
 }
 
-@connect(
-  (store: Stores.Authorize.IAuthorizeStoreState): Partial<IHeaderState> => {
-    const { user } = store;
+// @connect(
+//   (store: Stores.Authorize.IAuthorizeStoreState): Partial<IHeaderState> => {
+//     const { user } = store;
 
-    return {
-      isAuthorized: user.login !== null
-    };
-  },
-  (dispach: (event: any) => void) => {
-    return {
-      clearLogin(): void {
-        dispach({ type: "clear_login" });
-      }
-    };
-  }
-)
+//     return {
+//       isAuthorized: user.login !== null
+//     };
+//   },
+//   (dispach: (event: any) => void) => {
+//     return {
+//       clearLogin(): void {
+//         dispach({ type: "clear_login" });
+//       }
+//     };
+//   }
+// )
+@authorizeService.connect()
 class HeaderComponent extends StateComponent<
   RouteComponentProps<any>,
   { isAuthorized: boolean }

@@ -10,10 +10,6 @@ export const Grid = styled.table`
     background-color: #fff;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
     width: 100%;
-
-    * {
-      font-family: ${styles.font.family},sans-serif;;
-    }
 `;
 
 export const GridHeader = styled.thead`
@@ -32,7 +28,7 @@ export const GridHeaderCell = styled.th`
     line-height: 24px;
     letter-spacing: 0;
     height: 48px;
-    font-size: 12px;
+    font-size: ${styles.font.size}em;
     color: rgba(0,0,0,.54);
     padding-bottom: 8px;
     box-sizing: border-box;
@@ -49,10 +45,10 @@ export const GridCell = styled.td`
     position: relative;
     vertical-align: bottom;
     text-overflow: ellipsis;
-    line-height: 24px;
+    line-height: ${styles.font.size * 2}em;
     letter-spacing: 0;
     height: 48px;
-    font-size: 12px;
+    font-size: ${styles.font.size}em;
     color: rgba(0,0,0,.54);
     padding-bottom: 8px;
     box-sizing: border-box;

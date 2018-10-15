@@ -12,17 +12,15 @@ export const CardContainer = style.div`
 export const CardTitle = style.h1`
   color: #333;
   font-weight: 400;
-  font-size: ${Styles.font.bigSize}px;
-  font-family: ${Styles.font.family},sans-serif;
+  font-size: ${Styles.font.bigSize}em;
   line-height: 1.35417em;
   margin: 0;
   display: block;
 `;
 
 export const CardSubTitle = style.h3`
-  font-size: ${Styles.font.smallSize}px;
+  font-size: ${Styles.font.smallSize}em;
   font-weight: 400;
-  font-family: ${Styles.font.family},sans-serif;
   line-height: 1.5em;
   color: rgba(0, 0, 0, 0.54);
 `;

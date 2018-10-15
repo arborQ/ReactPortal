@@ -6,6 +6,7 @@
     },
     "moduleNameMapper" : {
         "bx-utils": "<rootDir>/src/utils/index.ts",
-        "bx-ui" : "<rootDir>/src/ui/material/index.ts"
+        "bx-ui" : "<rootDir>/src/ui/material/index.ts",
+        "bx-store": "<rootDir>/src/store/index.ts"
     }
 }

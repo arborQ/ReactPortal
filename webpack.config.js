@@ -41,7 +41,8 @@ var config = {
     alias: {
       'bx-ui': path.resolve(__dirname, './src/ui/material'),
       "bx-utils": path.resolve(__dirname, './src/utils'),
-      "bx-services": path.resolve(__dirname, "./src/services/index.ts")
+      "bx-services": path.resolve(__dirname, "./src/services/index.ts"),
+      "bx-store": path.resolve(__dirname, "./src/store/index.ts")
     }
   },
   mode: 'development',

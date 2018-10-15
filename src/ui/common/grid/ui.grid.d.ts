@@ -19,8 +19,8 @@ declare namespace Ui.Grid {
 
     export interface IColumnState {
         displayName?: string;
-        getData(item: any): any;
         renderContent?: (item: any) => JSX.Element | string;
+        getData(item: any): any;
     }
 
     export interface IColumnRenderState {

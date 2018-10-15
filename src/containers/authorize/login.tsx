@@ -21,52 +21,31 @@ interface ILoginActionProps extends ILoginState {
   clearLogin(): void;
 }
 
-@connect(
-  (store: Stores.Authorize.IAuthorizeStoreState): Partial<ILoginState> => {
-    const { user } = store;
+// @connect(
+//   (store: Stores.Authorize.IAuthorizeStoreState): Partial<ILoginState> => {
+//     const { user } = store;
 
-    return {
-      isAuthorized: user.login !== null,
-      login: "from store"
-    };
-  },
-  (dispach: (event: any) => void) => {
-    return {
-      changeLogin(login: string): void {
-        dispach({ type: "change_login", login });
-      },
-      clearLogin(): void {
-        dispach({ type: "clear_login" });
-      }
-    };
-  }
-)
+//     return {
+//       isAuthorized: user.login !== null,
+//       login: "from store"
+//     };
+//   },
+//   (dispach: (event: any) => void) => {
+//     return {
+//       changeLogin(login: string): void {
+//         dispach({ type: "change_login", login });
+//       },
+//       clearLogin(): void {
+//         dispach({ type: "clear_login" });
+//       }
+//     };
+//   }
+// )
+@authorizeService.connect()
 export default class LoginContainer extends StateComponent<
   ILoginActionProps,
   ILoginState
 > {
-  componentWillReceiveProps(nextProps: ILoginActionProps) {
-    this.updateState({
-      isAuthorized: nextProps.isAuthorized
-    });
-  }
-
-  componentDidMount() {
-    authorizeService.isAuthorized().then(success => {
-      if (success) {
-        this.props.changeLogin(this.state.login);
-      }
-    });
-  }
-
-  submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
-    return authorizeService
-      .login(this.state.login, this.state.password)
-      .then((res: any) => {
-        this.props.changeLogin(this.state.login);
-      });
-  }
-
   private fieldValidator = new Validator.Combine([
     new Validator.StringRequired(),
     new Validator.StringLength(1)
@@ -98,6 +77,28 @@ export default class LoginContainer extends StateComponent<
     }
   };
 
+  componentWillReceiveProps(nextProps: ILoginActionProps) {
+    this.updateState({
+      isAuthorized: nextProps.isAuthorized
+    });
+  }
+
+  componentDidMount() {
+    authorizeService.isAuthorized().then(success => {
+      if (success) {
+        this.props.changeLogin(this.state.login);
+      }
+    });
+  }
+
+  submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
+    return authorizeService
+      .login(this.state.login, this.state.password)
+      .then((res: any) => {
+        this.props.changeLogin(this.state.login);
+      });
+  }
+
   render() {
     return (
       <CardComponent
@@ -106,13 +107,13 @@ export default class LoginContainer extends StateComponent<
         subTitle={"Please provide credentials"}
       >
         <FormComponent submit={this.submit.bind(this)}>
-          {this.inputForm.login == undefined ? null : (
+          {this.inputForm.login === undefined ? null : (
             <InputComponent
               {...this.inputForm.login}
               value={this.state.login}
             />
           )}
-          {this.inputForm.password == undefined ? null : (
+          {this.inputForm.password === undefined ? null : (
             <InputComponent
               {...this.inputForm.password}
               value={this.state.password}

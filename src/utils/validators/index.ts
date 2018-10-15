@@ -1,11 +1,4 @@
-import Combine from "./combine.validator";
-import StringLength from "./string.length";
-import StringMatch from "./string.match";
-import StringRequired from "./string.required";
-
-export {
-    Combine,
-    StringRequired,
-    StringLength,
-    StringMatch,
-};
+export { default as Combine } from "./combine.validator";
+export { default as StringLength } from "./string.length";
+export { default as StringMatch } from "./string.match";
+export { default as StringRequired } from "./string.required";

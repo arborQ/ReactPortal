@@ -7,7 +7,7 @@
     "rules": {
         "member-access": [true, "no-public"],
         "arrow-parens": false,
-        "trailing-comma": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }

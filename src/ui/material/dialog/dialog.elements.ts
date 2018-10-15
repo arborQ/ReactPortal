@@ -22,12 +22,11 @@ const scaleIn = keyframes`
 `;
 
 const baseCss = styled.div`
-    font-family: ${styles.font.family},sans-serif;
     padding: 15px;
 `;
 
 export const DialogHeader = baseCss.extend`
-    font-size: ${styles.font.bigSize * 1.5 }px;
+    font-size: ${styles.font.bigSize}em;
     padding-top: 20px;
     padding-bottom: 20px;
     color: #FFF;

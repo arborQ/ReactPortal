@@ -10,9 +10,8 @@ export default {
         validation: "#C00000",
     },
     font: {
-        family: "Montserrat",
-        bigSize: 14,
-        size: 12,
-        smallSize: 10,
+        bigSize: 1.2,
+        size: 1,
+        smallSize: 0.8,
     },
 };

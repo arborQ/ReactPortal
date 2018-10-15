@@ -1,8 +1,8 @@
 declare namespace Ui.Button {
 
     export interface IRenderProps {
-        type: "button" | "submit",
-        disabled: boolean,
+        type: "button" | "submit";
+        disabled: boolean;
         onClick: () => void;
         text: string;
     }

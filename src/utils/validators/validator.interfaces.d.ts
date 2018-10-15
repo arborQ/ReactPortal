@@ -4,7 +4,7 @@ declare namespace Utils.Validation {
         isValid: boolean;
         message: string;
     }
-    
+
     export interface IValidator<T = Validatable | IValidator<Validatable>> {
         validate(model: T): Promise<IValidationResult>;
     }

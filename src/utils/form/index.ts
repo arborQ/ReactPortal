@@ -4,7 +4,7 @@ export type FormFields<TModel> = {
 
 export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
   get isValueValid(): boolean {
-    for (let item in this.items) {
+    for (const item in this.items) {
       const itemRule = this.items[item];
 
       if (itemRule !== undefined && !itemRule.isValueValid) {
@@ -16,7 +16,7 @@ export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
   }
 
   get isValueChanged(): boolean {
-    for (let item in this.items) {
+    for (const item in this.items) {
       const itemRule = this.items[item];
 
       if (itemRule !== undefined && itemRule.isValueChanged) {
@@ -27,16 +27,20 @@ export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
     return false;
   }
 
+  get isValid(): boolean {
+    return true;
+  }
+
+  items: FormFields<TModel>;
+
   constructor(
     public value: TModel,
     public onValueChange: Utils.Forms.ValueChangeAction<TModel>,
     public onValidationError: (errorMessages: string[]) => void
   ) {}
 
-  items: FormFields<TModel>;
-
   registerFields(formFields: FormFields<TModel> | {}): void {
-    for (let item in this.items) {
+    for (const item in this.items) {
       const itemRule = this.items[item];
 
       if (itemRule !== undefined) {
@@ -53,9 +57,5 @@ export class FormService<TModel> implements Utils.Forms.IFormElement<TModel> {
   }
   changeAction(model: TModel): void | Promise<TModel> {
     console.log("i don't care");
-  }
-
-  get isValid(): boolean {
-    return true;
   }
 }

@@ -17,7 +17,8 @@
     "paths": {
       "bx-ui" : [ "./src/ui/material/index.ts" ],
       "bx-utils" : [ "./src/utils/index.ts" ],
-      "bx-services": [ "./src/services/index.ts" ]
+      "bx-services": [ "./src/services/index.ts" ],
+      "bx-store": [ "./src/store/index.ts" ]
     },
     "lib": [
       "es6",

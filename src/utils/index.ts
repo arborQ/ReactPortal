@@ -1,37 +1,32 @@
-import { setTimeout } from "timers";
-import * as ajax from "./ajax";
-import ApiComponent from "./apiComponent";
-import Assign from "./assign";
-import AsyncComponent from "./asyncComponent";
-import Clone from "./clone";
-import SelectMany from "./selectMany";
-import StateComponent from "./stateComponent";
-import * as Validator from "./validators";
-import { FormService } from "./form";
-import InputFormElement from "./form/inputFormElement";
+export { setTimeout } from "timers";
+import { get, post, remove } from "./ajax";
+export { default as ApiComponent } from "./apiComponent";
+export { default as Assign } from "./assign";
+export { default as AsyncComponent } from "./asyncComponent";
+export { default as AuthorizedComponent } from "./components/authorized";
+export { default as Clone } from "./clone";
+export { default as SelectMany } from "./selectMany";
+export { default as StateComponent } from "./stateComponent";
+import * as validators from "./validators";
+export { FormService } from "./form";
+export { default as InputFormElement } from "./form/inputFormElement";
 
-function debounce(func: () => void, wait: number): () => void {
-    let timeout: NodeJS.Timer | null = null;
+export function Debounce(func: () => void, wait: number): () => void {
+  let timeout: any | null = null;
 
-    return () => {
-        if (!!timeout) {
-            clearTimeout(timeout);
-        }
+  return () => {
+    if (!!timeout) {
+      clearTimeout(timeout);
+    }
 
-        timeout = setTimeout(func, wait);
-    };
+    timeout = setTimeout(func, wait);
+  };
 }
 
-export {
-    ajax,
-    Assign,
-    ApiComponent,
-    AsyncComponent,
-    StateComponent,
-    SelectMany,
-    Clone,
-    Validator,
-    FormService,
-    InputFormElement,
-    debounce as Debounce,
+export const ajax = {
+  get,
+  post,
+  remove
 };
+
+export const Validator = validators;

@@ -5,8 +5,7 @@ export const Input = styled.input`
     border: none;
     border-bottom: 1px solid rgba(0,0,0,.12);
     display: block;
-    font-size: ${Styles.font.size}px;
-    font-family: ${Styles.font.family},sans-serif;
+    font-size: ${Styles.font.size}em;
     margin: 0;
     padding: 8px 5px;
     width: 100%;
@@ -18,7 +17,7 @@ export const Input = styled.input`
     }
     :focus ~ label, :valid ~ label {
       top: 0;
-      font-size: ${Styles.font.size - 4}px;
+      font-size: ${Styles.font.smallSize}em;
     }
     :focus ~ label:after {
       visibility: visible;
@@ -29,7 +28,7 @@ export const Input = styled.input`
 
 export const InputContainer = styled.div`
     position: relative;
-    font-size: ${Styles.font.size}px;
+    font-size: ${Styles.font.size}em;
     display: inline-block;
     box-sizing: border-box;
     width: 100%;
@@ -40,10 +39,9 @@ export const InputContainer = styled.div`
 `;
 
 export const Label = styled.label`
-    font-family: ${Styles.font.family},sans-serif;
     bottom: 0;
     color: rgba(0,0,0,.26);
-    font-size: ${Styles.font.size}px;
+    font-size: ${Styles.font.size}em;
     left: 0;
     right: 0;
     pointer-events: none;
@@ -56,7 +54,7 @@ export const Label = styled.label`
     text-align: left;
     transition: 0.2s linear;
     padding: 4px 5px;
-    
+
     :after {
       background-color: ${Styles.colors.main};
       bottom: 20px;
@@ -72,9 +70,8 @@ export const Label = styled.label`
 `;
 
 export const ValidationMessage = styled.span`
-  font-family: ${Styles.font.family},sans-serif;
   color: Red;
-  font-size: ${Styles.font.smallSize}px;
+  font-size: ${Styles.font.smallSize}em;
   float: right;
   position: absolute;
 `;
