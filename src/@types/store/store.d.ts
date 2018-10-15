@@ -1,19 +1,19 @@
 declare namespace Stores {
   export interface IAuthorizeStoreState {
     isAuthorized: boolean;
-    user: any | null;
+    user: Authorize.IUser | null;
   }
 
   export interface IGlobalStore {
     authorize: IAuthorizeStoreState;
   }
 
-  export interface IStoreAction {
+  export interface IStoreAction<S> {
     type: number;
-    data: any;
+    action<T>(state: S, action: any): S;
   }
 
-  export type StoreReducer<P> = (state: P, action: IStoreAction) => P;
+  export type StoreReducer<P> = (state: P, action: any) => P;
 
   export type IGlobalReducers = {
     [P in keyof IGlobalStore]: StoreReducer<IGlobalStore[P]>

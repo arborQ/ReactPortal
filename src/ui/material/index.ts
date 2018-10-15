@@ -1,4 +1,5 @@
 import AnchorComponent from "./anchor";
+import {AvatarComponent} from "./avatar/avatar.elements";
 import ButtonComponent from "./button";
 import CardComponent from "./card";
 import DialogComponent from "./dialog";
@@ -11,6 +12,7 @@ import Styles from "./styles";
 
 export {
     AnchorComponent,
+    AvatarComponent,
     DialogComponent,
     InputComponent,
     ButtonComponent,

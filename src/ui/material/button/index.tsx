@@ -9,7 +9,15 @@ export default class ButtonComponent extends CommonButton {
       <Button
         type={renderProps.type}
         disabled={renderProps.disabled}
-        onClick={renderProps.onClick}>
+        onClick={$event => {
+          if (renderProps.type !== "submit") {
+            $event.preventDefault();
+            $event.stopPropagation();
+          }
+
+          renderProps.onClick();
+        }}
+      >
         <span>{renderProps.text}</span>
       </Button>
     );

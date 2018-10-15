@@ -31,7 +31,11 @@ export default abstract class StateComponent<P, S> extends React.Component<P, S>
     return JSON.stringify(this.state) !== JSON.stringify(newState);
   }
 
+  propsWillChange(newProps: P): boolean {
+    return JSON.stringify(this.props) !== JSON.stringify(newProps);
+  }
+
   shouldComponentUpdate(nextProps: P, nextState: S): boolean {
-    return this.stateWillChange(nextState);
+    return this.stateWillChange(nextState) || this.propsWillChange(nextProps);
   }
 }

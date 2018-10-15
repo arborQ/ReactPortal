@@ -8,6 +8,7 @@ declare namespace Ui.Button {
     }
 
     export interface IProps {
+        type?: "button" | "submit";
         label: string;
         click?: () => void | Promise<any>;
     }

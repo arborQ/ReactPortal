@@ -1,17 +1,11 @@
 declare namespace Services.Authorize {
-  export interface IUser {
-    uid: string;
-    login: string;
-    email: string;
-  }
-
   export interface ISyncAuthorize {
     isAuthorized: boolean;
-    currentUser: IUser | null;
+    currentUser: Stores.Authorize.IUser | null;
   }
 
   export interface ISyncActions {
-    setCurrentUser(user: IUser): void;
+    setCurrentUser(token: string): void;
     clearCurrentUser(): void;
   }
 }

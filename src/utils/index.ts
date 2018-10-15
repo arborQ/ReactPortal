@@ -11,15 +11,24 @@ import * as validators from "./validators";
 export { FormService } from "./form";
 export { default as InputFormElement } from "./form/inputFormElement";
 
-export function Debounce(func: () => void, wait: number): () => void {
+export function Always<T>(promise: Promise<T>): Promise<T | null> {
+  return new Promise<T | null>(resolve => {
+    promise.then(resolve).catch(() => resolve(null));
+  });
+}
+
+export function Debounce<T>(
+  func: (value: T) => void,
+  wait: number
+): (value: T) => void {
   let timeout: any | null = null;
 
-  return () => {
+  return (value: T) => {
     if (!!timeout) {
       clearTimeout(timeout);
     }
 
-    timeout = setTimeout(func, wait);
+    timeout = setTimeout(() => func(value), wait);
   };
 }
 

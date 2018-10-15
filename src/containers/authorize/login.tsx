@@ -1,5 +1,6 @@
 import { authorizeService } from "bx-services";
 import {
+  AvatarComponent,
   ButtonComponent,
   CardComponent,
   FormComponent,
@@ -16,31 +17,11 @@ interface ILoginState {
   isAuthorized: boolean;
 }
 
-interface ILoginActionProps extends ILoginState {
-  changeLogin(login: string): void;
-  clearLogin(): void;
-}
+interface ILoginActionProps
+  extends ILoginState,
+    Services.Authorize.ISyncActions,
+    Services.Authorize.ISyncAuthorize {}
 
-// @connect(
-//   (store: Stores.Authorize.IAuthorizeStoreState): Partial<ILoginState> => {
-//     const { user } = store;
-
-//     return {
-//       isAuthorized: user.login !== null,
-//       login: "from store"
-//     };
-//   },
-//   (dispach: (event: any) => void) => {
-//     return {
-//       changeLogin(login: string): void {
-//         dispach({ type: "change_login", login });
-//       },
-//       clearLogin(): void {
-//         dispach({ type: "clear_login" });
-//       }
-//     };
-//   }
-// )
 @authorizeService.connect()
 export default class LoginContainer extends StateComponent<
   ILoginActionProps,
@@ -83,19 +64,11 @@ export default class LoginContainer extends StateComponent<
     });
   }
 
-  componentDidMount() {
-    authorizeService.isAuthorized().then(success => {
-      if (success) {
-        this.props.changeLogin(this.state.login);
-      }
-    });
-  }
-
   submit($event: React.FormEvent<HTMLFormElement>): Promise<any> {
     return authorizeService
       .login(this.state.login, this.state.password)
-      .then((res: any) => {
-        this.props.changeLogin(this.state.login);
+      .then((res: string) => {
+        this.props.setCurrentUser(res);
       });
   }
 
@@ -106,7 +79,8 @@ export default class LoginContainer extends StateComponent<
         title={"Log in"}
         subTitle={"Please provide credentials"}
       >
-        <FormComponent submit={this.submit.bind(this)}>
+        <FormComponent submit={this.submit.bind(this)} delay={50}>
+          <AvatarComponent email="arbor@o2.pl" />
           {this.inputForm.login === undefined ? null : (
             <InputComponent
               {...this.inputForm.login}
@@ -122,10 +96,10 @@ export default class LoginContainer extends StateComponent<
           {this.state.isAuthorized ? (
             <ButtonComponent
               label={`Log out: ${this.state.login}`}
-              click={() => this.props.clearLogin()}
+              click={() => this.props.clearCurrentUser()}
             />
           ) : (
-            <ButtonComponent label={`Save: ${this.state.login}`} />
+            <ButtonComponent label={`Save: ${this.props.isAuthorized}`} />
           )}
         </FormComponent>
       </CardComponent>
