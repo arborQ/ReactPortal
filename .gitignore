@@ -5,4 +5,3 @@ screenshots
 .module-cache
 *.log*
 build
-public
