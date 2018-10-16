@@ -9,6 +9,7 @@ import HeaderComponent from "./header";
 import InputComponent from "./input";
 import LoadingComponent from "./loader";
 import Styles from "./styles";
+export { HorizontalLayout, VerticalLayout } from "./layout/layout.elements";
 
 export {
     AnchorComponent,

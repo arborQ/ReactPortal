@@ -2,13 +2,6 @@ import { ajax } from "bx-utils";
 import { connect } from "react-redux";
 
 export default class AuthorizeService {
-  static parseJwt<T>(token: string) {
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-
-    return JSON.parse(window.atob(base64)) as T;
-  }
-
   connect(): ClassDecorator {
     return connect(
       (store: Stores.IGlobalStore): Services.Authorize.ISyncAuthorize => {
@@ -20,16 +13,7 @@ export default class AuthorizeService {
       (dispach): Services.Authorize.ISyncActions => {
         return {
           setCurrentUser(token: string): void {
-            const obj = AuthorizeService.parseJwt<any>(token);
-
-            const data: Stores.Authorize.IUser = {
-              id: +obj.Id,
-              email: obj.Email,
-              fullName: obj.FullName,
-              login: obj.Login
-            };
-
-            dispach({ type: "change_login", data });
+            dispach({ type: "login_token", data: token });
           },
           clearCurrentUser(): void {
             dispach({ type: "clear_login" });

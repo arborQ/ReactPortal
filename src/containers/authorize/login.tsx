@@ -4,6 +4,7 @@ import {
   ButtonComponent,
   CardComponent,
   FormComponent,
+  HorizontalLayout,
   InputComponent
 } from "bx-ui";
 import { StateComponent } from "bx-utils";
@@ -73,35 +74,50 @@ export default class LoginContainer extends StateComponent<
   }
 
   render() {
+    const cardProps: Ui.Card.IProps =
+      this.props.currentUser !== null
+        ? {
+            size: 200,
+            subTitle: `Log in as ${this.props.currentUser.fullName}`,
+            title: (
+              <HorizontalLayout>
+                <AvatarComponent email={this.props.currentUser.email} />
+                <span>User validated</span>
+              </HorizontalLayout>
+            )
+          }
+        : {
+            size: 400,
+            subTitle: "Please provide credentials",
+            title: "Log in"
+          };
+
     return (
-      <CardComponent
-        size={400}
-        title={"Log in"}
-        subTitle={"Please provide credentials"}
-      >
-        <FormComponent submit={this.submit.bind(this)} delay={50}>
-          <AvatarComponent email="arbor@o2.pl" />
-          {this.inputForm.login === undefined ? null : (
-            <InputComponent
-              {...this.inputForm.login}
-              value={this.state.login}
-            />
-          )}
-          {this.inputForm.password === undefined ? null : (
-            <InputComponent
-              {...this.inputForm.password}
-              value={this.state.password}
-            />
-          )}
-          {this.state.isAuthorized ? (
+      <CardComponent {...cardProps}>
+        {this.props.currentUser !== null ? (
+          <div>
             <ButtonComponent
-              label={`Log out: ${this.state.login}`}
+              label={`Log out: ${this.props.currentUser.login}`}
               click={() => this.props.clearCurrentUser()}
             />
-          ) : (
-            <ButtonComponent label={`Save: ${this.props.isAuthorized}`} />
-          )}
-        </FormComponent>
+          </div>
+        ) : (
+          <FormComponent submit={this.submit.bind(this)} delay={50}>
+            {this.inputForm.login === undefined ? null : (
+              <InputComponent
+                {...this.inputForm.login}
+                value={this.state.login}
+              />
+            )}
+            {this.inputForm.password === undefined ? null : (
+              <InputComponent
+                {...this.inputForm.password}
+                value={this.state.password}
+              />
+            )}
+            <ButtonComponent label={`Validate`} />
+          </FormComponent>
+        )}
       </CardComponent>
     );
   }

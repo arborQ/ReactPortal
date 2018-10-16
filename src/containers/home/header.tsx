@@ -32,28 +32,15 @@ interface IHeaderState extends Services.Authorize.ISyncAuthorize {
   isAuthorized: boolean;
 }
 
-export interface IHeaderProps extends RouteComponentProps<any>, IHeaderState, Services.Authorize.ISyncActions {
-}
+export interface IHeaderProps
+  extends RouteComponentProps<any>,
+    IHeaderState,
+    Services.Authorize.ISyncActions,
+    Services.Authorize.ISyncAuthorize {}
 
-// @connect(
-//   (store: Stores.Authorize.IAuthorizeStoreState): Partial<IHeaderState> => {
-//     const { user } = store;
-
-//     return {
-//       isAuthorized: user.login !== null
-//     };
-//   },
-//   (dispach: (event: any) => void) => {
-//     return {
-//       clearLogin(): void {
-//         dispach({ type: "clear_login" });
-//       }
-//     };
-//   }
-// )
 @authorizeService.connect()
 class HeaderComponent extends StateComponent<
-  RouteComponentProps<any>,
+  IHeaderProps,
   { isAuthorized: boolean }
 > {
   componentWillReceiveProps(nextProps: IHeaderProps) {
@@ -93,8 +80,11 @@ class HeaderComponent extends StateComponent<
         ))}
         {this.state.isAuthorized ? (
           <a
-            onClick={() => {
-              authorizeService.logout();
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              this.props.clearCurrentUser();
+              this.props.history.push("/authorize/login");
             }}
           >
             Log out

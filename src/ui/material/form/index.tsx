@@ -1,4 +1,4 @@
-import { Always, Debounce } from "bx-utils";
+import { Always, Debounce, StateComponent } from "bx-utils";
 import * as React from "react";
 import LoadingComponent from "../loader";
 import { Form } from "./form.elements";
