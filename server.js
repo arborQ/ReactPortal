@@ -7,4 +7,4 @@ const port = 8080;
 app.use(express.static('public'));;
 
 
-app.listen(port, () => console.log(`Proxy listening on port ${port}!`))
+app.listen(port, () => console.log(`Proxy listening on http://localhost:${port}!`))

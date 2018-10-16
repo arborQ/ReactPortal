@@ -1,6 +1,6 @@
 {
   "engines" : { 
-    "node" : "8.12.0",
+    "node" : "8.11.1",
     "npm" : "6.4.1" 	
   },
   "name": "react-portal-business",
@@ -11,7 +11,7 @@
     "dev": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
     "build": "webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose",
-    "start": "webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose && node ./bin/proxy.server.js",
+    "start": "webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose && node ./server.js",
     "sw": "sw-precache --root=public --config=./sw-precache-config.js --verbose",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
