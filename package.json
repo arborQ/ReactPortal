@@ -1,4 +1,8 @@
 {
+  "engines" : { 
+    "node" : "8.12.0",
+    "npm" : "6.4.1" 	
+  },
   "name": "react-portal-business",
   "version": "0.0.1",
   "private": true,
