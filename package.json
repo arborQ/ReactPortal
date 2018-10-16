@@ -10,8 +10,9 @@
   "scripts": {
     "dev": "node ./bin/dev.server.js",
     "mock": "node ./bin/mock.server.js",
-    "build": "webpack-cli -p --progress --colors && sw-precache --root=public --config=./sw-precache-config.js --verbose",
+    "build": "webpack-cli -p",
     "start": "node ./server.js",
+    "serve": "node ./server.js",
     "sw": "sw-precache --root=public --config=./sw-precache-config.js --verbose",
     "test": "cls && jest --notify --silent --config=testconfig.json",
     "test-debug": "cls && jest --notify --config=testconfig.json",
