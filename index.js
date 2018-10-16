@@ -1,23 +1,24 @@
-// const express = require("express");
-// const path = require("path");
+const express = require("express");
+const path = require("path");
 
-// const app = express();
-// const port = process.env.PORT || 8080;
+const app = express();
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
-// app.listen(port, function() {
-//   console.log("Proxy listening on http://localhost:" + port);
-// });
+const port = process.env.PORT || 1337;
 
-var http = require("http");
-
-var server = http.createServer(function(request, response) {
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.end("Hello Azure try me :)!");
+app.listen(port, function() {
+  console.log("Proxy listening on http://localhost:" + port);
 });
 
-var port = process.env.PORT || 1337;
-server.listen(port);
+// var http = require("http");
 
-console.log("Server running at http://localhost:%d", port);
+// var server = http.createServer(function(request, response) {
+//   response.writeHead(200, { "Content-Type": "text/plain" });
+//   response.end("Hello Azure try me :)!");
+// });
+
+// var port = process.env.PORT || 1337;
+// server.listen(port);
+
+// console.log("Server running at http://localhost:%d", port);
