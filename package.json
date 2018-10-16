@@ -9,13 +9,10 @@
   "description": "A frontend business portal with React, Redux and Typescript",
   "scripts": {
     "dev": "node ./bin/dev.server.js",
-    "mock": "node ./bin/mock.server.js",
     "build": "webpack-cli -p",
-    "start": "node ./server.js",
-    "serve": "node ./server.js",
+    "start": "node index.js",
+    "serve": "node index.js",
     "sw": "sw-precache --root=public --config=./sw-precache-config.js --verbose",
-    "test": "cls && jest --notify --silent --config=testconfig.json",
-    "test-debug": "cls && jest --notify --config=testconfig.json",
     "lint:totals": "tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t totals",
     "lint:run": "tslint -c tslint.json --project tsconfig.json --format stylish",
     "lint:fix": "tslint -c tslint.json --project tsconfig.json --fix"
