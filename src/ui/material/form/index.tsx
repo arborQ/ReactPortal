@@ -9,6 +9,8 @@ interface IFormProps extends React.HTMLProps<any> {
   loadingMessage?: string;
 }
 
+console.log({ Always, Debounce, StateComponent });
+
 export default class FormComponent extends React.Component<
   IFormProps,
   { isLoading: boolean }

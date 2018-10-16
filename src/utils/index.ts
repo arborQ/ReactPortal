@@ -3,7 +3,6 @@ import { get, post, remove } from "./ajax";
 export { default as ApiComponent } from "./apiComponent";
 export { default as Assign } from "./assign";
 export { default as AsyncComponent } from "./asyncComponent";
-export { default as AuthorizedComponent } from "./components/authorized";
 export { default as Clone } from "./clone";
 export { default as SelectMany } from "./selectMany";
 export { default as StateComponent } from "./stateComponent";

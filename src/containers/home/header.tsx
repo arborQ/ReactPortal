@@ -7,7 +7,9 @@ import styled from "styled-components";
 
 import { authorizeService } from "bx-services";
 import { Link, NavLink } from "react-router-dom";
-import { ChangePasswordUrl, LoginUrl } from "../authorize";
+
+const ChangePasswordUrl = "/authorize/changepassword";
+const LoginUrl = "/authorize/login";
 
 const Header = styled.header`
   background-color: ${Styles.colors.main};

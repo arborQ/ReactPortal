@@ -3,6 +3,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 var webpack = require('webpack'); //to access built-in plugins
 var path = require('path');
+var CircularDependencyPlugin = require('circular-dependency-plugin');
 var outPath = path.join(__dirname, './public');
 var sourcePath = path.join(__dirname, './src');
 
@@ -47,6 +48,7 @@ var config = {
   },
   mode: 'development',
   target: 'web',
+  devtool: 'source-map',
   devServer: {
     contentBase: sourcePath,
     stats: {
@@ -104,6 +106,11 @@ var config = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
+    // new CircularDependencyPlugin({
+    //   exclude: /a\.js|node_modules/,
+    //   failOnError: true,
+    //   cwd: process.cwd(),
+    // })
   ],
 
   node: {

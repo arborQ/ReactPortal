@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Route, RouteComponentProps, Router, Switch } from "react-router";
-import { UsersUrl } from "./";
 import UserAddComponent from "./user.add";
 import UserListComponent from "./user.list";
+export const UsersUrl = "/users";
 
 export default class AuthorizeContainer extends React.Component<
   RouteComponentProps<any>,
