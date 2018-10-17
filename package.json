@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "node ./bin/dev.server.js",
     "build": "webpack-cli -p",
-    "start": "webpack-cli && node index.js",
-    "serve": "node index.js",
+    "start": "node server.js",
+    "serve": "node server.js",
     "sw": "sw-precache --root=public --config=./sw-precache-config.js --verbose",
     "lint:totals": "tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t totals",
     "lint:run": "tslint -c tslint.json --project tsconfig.json --format stylish",
