@@ -1,8 +1,10 @@
 import {
+    ButtonComponent,
     CardComponent,
     GridComponent,
+    HorizontalLayout,
 } from "bx-ui";
-import { StateComponent } from "bx-utils";
+import { ajax, StateComponent } from "bx-utils";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
@@ -10,8 +12,24 @@ import { Link } from "react-router-dom";
 export default class UserListContainer
     extends StateComponent<RouteComponentProps<{}>, Containers.Users.IUserStoreState> {
 
+    constructor() {
+        super({
+            users: []
+        });
+    }
+
     private get gridSchema(): Ui.Grid.IGridSchema {
         return {
+            email: {
+                displayName: "Email",
+                getData: (data: Containers.Users.IUser) => (
+                    <a href={`mailto:${data.email}`}>{data.email}</a>
+                ),
+            },
+            firstName: {
+                displayName: "First name",
+                getData: (data: Containers.Users.IUser) => data.firstName,
+            },
             isActive: {
                 displayName: "Active?",
                 getData: (data: Containers.Users.IUser) => data.isActive,
@@ -19,46 +37,33 @@ export default class UserListContainer
                     <input type="checkbox" checked={data.isActive} onChange={() => { /* */ }} />
                 ),
             },
-            userLogin: {
-                displayName: "Login",
-                getData: (data: Containers.Users.IUser) => data.login,
-            },
-            firstName: {
-                displayName: "First name",
-                getData: (data: Containers.Users.IUser) => data.firstName,
-            },
             lastName: {
                 displayName: "Last name",
                 getData: (data: Containers.Users.IUser) => data.lastName,
             },
-            email: {
-                displayName: "Email",
-                getData: (data: Containers.Users.IUser) => (
-                    <a href={`mailto:${data.email}`}>{data.email}</a>
-                ),
+            userLogin: {
+                displayName: "Login",
+                getData: (data: Containers.Users.IUser) => data.login,
             },
         };
     }
 
-    componentWillMount() {
-        /* */
+    componentDidMount(): void {
+        ajax.get("/api/account/users").then((users: Containers.Users.IUser[]) => {
+            this.updateState({ users });
+        });
     }
 
     render() {
-        const data: Containers.Users.IUser[] = [
-            { isActive: true, firstName: "Lukasz", lastName: "Wojcik", login: "arbor", email: "arbor@o2.pl" },
-            { isActive: true, firstName: "Aleksandra", lastName: "Wojcik", login: "ola", email: "arbor@o3.pl" },
-            { isActive: true, firstName: "Julia", lastName: "Wojcik", login: "julex", email: "arbor@o4.pl" },
-        ];
-
         return (
             <CardComponent title={"List of users"} subTitle={"You can see list of users"}>
-                <div>
-                    <Link to="/users/add">Add user</Link>
-                </div>
+                <HorizontalLayout>
+                    <ButtonComponent label="Add user" click={() => { this.props.history.push("/users/add"); }} />
+                    <ButtonComponent label="Remove" click={() => { this.props.history.push("/users/add"); }} />
+                </HorizontalLayout>
                 <GridComponent
                     schema={this.gridSchema}
-                    data={data}
+                    data={this.state.users}
                     onSelected={(users: Containers.Users.IUser[]) => {
                         /* */
                     }} />

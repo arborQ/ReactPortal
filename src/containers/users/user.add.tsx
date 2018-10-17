@@ -4,7 +4,9 @@ import {
     CardComponent,
     DialogComponent,
     GridComponent,
+    HorizontalLayout,
     InputComponent,
+    VerticalLayout,
 } from "bx-ui";
 import { ajax, StateComponent, Validator } from "bx-utils";
 import * as React from "react";
@@ -53,21 +55,21 @@ export default class UserAddContainer extends StateComponent<RouteComponentProps
             },
             {
                 name: "firstName",
-                label: "firstName",
+                label: "First name",
                 value: this.state.firstName,
                 change: (firstName) => this.updateState({ firstName }),
                 validator: new Validator.StringRequired(),
             },
             {
                 name: "lastName",
-                label: "lastName",
+                label: "Last name",
                 value: this.state.lastName,
                 change: (lastName) => this.updateState({ lastName }),
                 validator: new Validator.StringRequired(),
             },
             {
                 name: "email",
-                label: "email",
+                label: "Email address",
                 value: this.state.email,
                 change: (email) => this.updateState({ email }),
                 validator: new Validator.StringRequired(),
@@ -84,9 +86,13 @@ export default class UserAddContainer extends StateComponent<RouteComponentProps
                         });
                     }
                 }}>
-                { inputFields.map((field) => <InputComponent key={field.name} {...field} />) }
-                <ButtonComponent label="Save" click={this.addUser.bind(this)} />
-                <AnchorComponent href="/users">{"Cancel"}</AnchorComponent>
+                <VerticalLayout>
+                    {inputFields.map((field) => <InputComponent key={field.name} {...field} />)}
+                    <HorizontalLayout>
+                        <ButtonComponent label="Save" click={this.addUser.bind(this)} />
+                        <AnchorComponent href="/users">{"Cancel"}</AnchorComponent>
+                    </HorizontalLayout>
+                </VerticalLayout>
             </DialogComponent>
         );
     }

@@ -9,7 +9,7 @@ import { UsersListComponent } from "../users";
 import Header from "./header";
 
 const AuthorizeUrl = "/authorize/login";
-const UsersUrl = "/users/list";
+const UsersUrl = "/users";
 
 class HomeContainer extends React.Component<
   RouteComponentProps<any> | any,
