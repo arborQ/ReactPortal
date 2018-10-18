@@ -1,53 +1,51 @@
-import { Always, Debounce, StateComponent } from "bx-utils";
+import { Always, Debounce } from "bx-utils";
 import * as React from "react";
 import LoadingComponent from "../loader";
 import { Form } from "./form.elements";
 
 interface IFormProps extends React.HTMLProps<any> {
-  delay?: number;
-  submit: () => Promise<any> | void;
-  loadingMessage?: string;
+	delay?: number;
+	submit: () => Promise<any> | void;
+	loadingMessage?: string;
 }
 
-console.log({ Always, Debounce, StateComponent });
-
 export default class FormComponent extends React.Component<
-  IFormProps,
-  { isLoading: boolean }
+	IFormProps,
+	{ isLoading: boolean }
 > {
-  constructor() {
-    super();
-    this.state = { isLoading: false };
-  }
+	constructor() {
+		super();
+		this.state = { isLoading: false };
+	}
 
-  submitAction($event: React.FormEvent<HTMLFormElement>) {
-    $event.stopPropagation();
-    $event.preventDefault();
+	submitAction($event: React.FormEvent<HTMLFormElement>) {
+		$event.stopPropagation();
+		$event.preventDefault();
 
-    const debounce = Debounce<boolean>(isLoading => {
-      this.setState(Object.assign({}, this.state, { isLoading }));
-    }, this.props.delay || 100);
+		const debounce = Debounce<boolean>(isLoading => {
+			this.setState(Object.assign({}, this.state, { isLoading }));
+		}, this.props.delay || 100);
 
-    debounce(true);
+		debounce(true);
 
-    Always(Promise.resolve(this.props.submit())).then(() => {
-      debounce(false);
-    });
-  }
+		Always(Promise.resolve(this.props.submit())).then(() => {
+			debounce(false);
+		});
+	}
 
-  render() {
-    return (
-      <Form
-        loading={this.state.isLoading}
-        onSubmit={this.submitAction.bind(this)}
-      >
-        {this.state.isLoading ? (
-          <div className="loading">
-            <LoadingComponent />
-          </div>
-        ) : null}
-        <div className="content">{this.props.children}</div>
-      </Form>
-    );
-  }
+	render() {
+		return (
+			<Form
+				loading={this.state.isLoading}
+				onSubmit={this.submitAction.bind(this)}
+			>
+				{this.state.isLoading ? (
+					<div className="loading">
+						<LoadingComponent />
+					</div>
+				) : null}
+				<div className="content">{this.props.children}</div>
+			</Form>
+		);
+	}
 }

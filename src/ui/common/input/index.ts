@@ -1,36 +1,77 @@
 import * as React from "react";
 
-export default abstract class InputComponent extends React.PureComponent<Ui.Input.IProps, Ui.Input.IState> {
-  constructor() {
-    super();
-    this.state = { value: "", isValid: true, working: false };
-  }
+export default abstract class InputComponent extends React.PureComponent<
+	Ui.Input.IProps,
+	Ui.Input.IState
+> {
+	constructor() {
+		super();
+		this.state = { value: "", isValid: true, working: false };
+	}
 
-  componentDidMount() {
-    this.updateParent(this.props.value || "?", true);
-  }
+	componentDidMount() {
+		this.setStateFromProps(this.props);
+	}
 
-  updateParent(value: string, silent: boolean = false) {
-    this.setState(Object.assign(this.state, { value, working: !!this.props.validator }));
-    if (!silent) {
-      this.props.change(value);
-    }
+	componentWillReceiveProps(newProps: Ui.Input.IProps): void {
+		this.setStateFromProps(newProps);
+	}
 
-    if (!!this.props.validator) {
-      this.props.validator.validate(value)
-        .then((result) => {
-          this.setState(Object.assign(this.state, { isValid: true, working: false, messages: [] }));
-        }).catch((result: Utils.Validation.IValidationResult) => {
-          this.setState(Object.assign(this.state, { isValid: false, working: false, messages: [ result.message ] }));
-        });
-    }
-  }
+	updateParent(value: string): void {
+		this.setState({
+			...this.state,
+			value
+		});
 
-  render() {
-    return (
-      this.renderInput()
-    );
-  }
+		if (!!this.props.validator) {
+			this.props.validator
+				.validate(value)
+				.then(result => {
+					this.setState(
+						{
+							...this.state,
+							...{
+								value,
+								isValid: true,
+								working: false,
+								messages: []
+							}
+						},
+						() => {
+							this.props.change(value);
+						}
+					);
+				})
+				.catch((result: Utils.Validation.IValidationResult) => {
+					this.setState(
+						Object.assign(
+							this.state,
+							{
+								value,
+								isValid: false,
+								working: false,
+								messages: [result.message]
+							},
+							() => {
+								this.props.change(value);
+							}
+						)
+					);
+				});
+		}
+	}
 
-  protected abstract renderInput(): JSX.Element;
+	render() {
+		return this.renderInput();
+	}
+
+	protected abstract renderInput(): JSX.Element;
+
+	protected resetState(): void {
+		this.setStateFromProps(this.props);
+	}
+
+	private setStateFromProps(props: Ui.Input.IProps): void {
+		this.setState({ ...this.state, ...{ value: props.value || "" } });
+	}
 }

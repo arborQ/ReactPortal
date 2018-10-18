@@ -12,32 +12,32 @@ const AuthorizeUrl = "/authorize/login";
 const UsersUrl = "/users";
 
 class HomeContainer extends React.Component<
-  RouteComponentProps<any> | any,
-  {}
+	RouteComponentProps<any> | any,
+	{}
 > {
-  render() {
-    return (
-      <Provider store={store}>
-        <div>
-          <Header {...this.props as any} />
-          <div style={{ paddingTop: 10 }}>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={AsyncComponent(
-                  async () => (await import("./home.component")).default
-                )}
-              />
-              <Route path={AuthorizeUrl} component={AuthorizeComponent} />
-              <Route path={UsersUrl} component={UsersListComponent} />
-              <Route component={IndexComponent} />
-            </Switch>
-          </div>
-        </div>
-      </Provider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<div>
+					<Header {...this.props as any} />
+					<div style={{ paddingTop: 10 }}>
+						<Switch>
+							<Route
+								exact
+								path="/"
+								component={AsyncComponent(
+									async () => (await import("./home.component")).default
+								)}
+							/>
+							<Route path={AuthorizeUrl} component={AuthorizeComponent} />
+							<Route path={UsersUrl} component={UsersListComponent} />
+							<Route component={IndexComponent} />
+						</Switch>
+					</div>
+				</div>
+			</Provider>
+		);
+	}
 }
 
 export default withRouter(HomeContainer);

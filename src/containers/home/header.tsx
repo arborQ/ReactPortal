@@ -12,89 +12,89 @@ const ChangePasswordUrl = "/authorize/changepassword";
 const LoginUrl = "/authorize/login";
 
 const Header = styled.header`
-  background-color: ${Styles.colors.main};
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  padding: 0 10px;
-  font-size: 1em;
+	background-color: ${Styles.colors.main};
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 10px;
+	font-size: 1em;
 
-  a {
-    padding: 0 10px;
-    text-decoration: none;
-    color: ${Styles.colors.second};
+	a {
+		padding: 0 10px;
+		text-decoration: none;
+		color: ${Styles.colors.second};
 
-    &.active {
-      color: #fff;
-    }
-  }
+		&.active {
+			color: #fff;
+		}
+	}
 `;
 
 interface IHeaderState extends Services.Authorize.ISyncAuthorize {
-  isAuthorized: boolean;
+	isAuthorized: boolean;
 }
 
 export interface IHeaderProps
-  extends RouteComponentProps<any>,
-    IHeaderState,
-    Services.Authorize.ISyncActions,
-    Services.Authorize.ISyncAuthorize {}
+	extends RouteComponentProps<any>,
+		IHeaderState,
+		Services.Authorize.ISyncActions,
+		Services.Authorize.ISyncAuthorize {}
 
 @authorizeService.connect()
 class HeaderComponent extends StateComponent<
-  IHeaderProps,
-  { isAuthorized: boolean }
+	IHeaderProps,
+	{ isAuthorized: boolean }
 > {
-  componentWillReceiveProps(nextProps: IHeaderProps) {
-    this.updateState({
-      isAuthorized: nextProps.isAuthorized
-    });
-  }
+	componentWillReceiveProps(nextProps: IHeaderProps) {
+		this.updateState({
+			isAuthorized: nextProps.isAuthorized
+		});
+	}
 
-  render(): JSX.Element {
-    const { pathname } = this.props.location;
+	render(): JSX.Element {
+		const { pathname } = this.props.location;
 
-    let paths = [{ path: "/", label: "Home" }];
+		let paths = [{ path: "/", label: "Home" }];
 
-    if (this.state.isAuthorized) {
-      paths = [
-        ...paths,
-        ...[
-          { path: ChangePasswordUrl, label: "Change password" },
-          { path: "/users", label: "Users" },
-          { path: "/products", label: "Products" }
-        ]
-      ];
-    } else {
-      paths = [...paths, ...[{ path: LoginUrl, label: "Login" }]];
-    }
+		if (this.state.isAuthorized) {
+			paths = [
+				...paths,
+				...[
+					{ path: ChangePasswordUrl, label: "Change password" },
+					{ path: "/users", label: "Users" },
+					{ path: "/products", label: "Products" }
+				]
+			];
+		} else {
+			paths = [...paths, ...[{ path: LoginUrl, label: "Login" }]];
+		}
 
-    return (
-      <Header>
-        {paths.map((element: any) => (
-          <Link
-            className={pathname === element.path ? "active" : ""}
-            key={element.path}
-            to={element.path}
-          >
-            {element.label}
-          </Link>
-        ))}
-        {this.state.isAuthorized ? (
-          <a
-            href="#"
-            onClick={e => {
-              e.preventDefault();
-              this.props.clearCurrentUser();
-              this.props.history.push("/authorize/login");
-            }}
-          >
-            Log out
-          </a>
-        ) : null}
-      </Header>
-    );
-  }
+		return (
+			<Header>
+				{paths.map((element: any) => (
+					<Link
+						className={pathname === element.path ? "active" : ""}
+						key={element.path}
+						to={element.path}
+					>
+						{element.label}
+					</Link>
+				))}
+				{this.state.isAuthorized ? (
+					<a
+						href="#"
+						onClick={e => {
+							e.preventDefault();
+							this.props.clearCurrentUser();
+							this.props.history.push("/authorize/login");
+						}}
+					>
+						Log out
+					</a>
+				) : null}
+			</Header>
+		);
+	}
 }
 
 export default HeaderComponent;
