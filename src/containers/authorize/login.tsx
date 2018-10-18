@@ -85,12 +85,12 @@ export default class LoginContainer extends StateComponent<
 								<span>User validated</span>
 							</HorizontalLayout>
 						)
-				  }
+				}
 				: {
 						size: 400,
 						subTitle: "Please provide credentials",
 						title: "Log in"
-				  };
+				};
 
 		return (
 			<CardComponent {...cardProps}>
