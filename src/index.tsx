@@ -20,8 +20,8 @@ injectGlobal`
 const history = createBrowserHistory();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Home />
-  </BrowserRouter>,
-  document.getElementById("root")
+	<BrowserRouter>
+		<Home />
+	</BrowserRouter>,
+	document.getElementById("root")
 );

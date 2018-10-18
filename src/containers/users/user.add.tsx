@@ -54,15 +54,17 @@ export default class UserAddContainer extends StateComponent<
 	}
 
 	submit(): void {
-		/* */
+		this.addUser().then(() => {
+			this.props.history.replace("/users");
+		});
 	}
 
 	addUser(): Promise<number> {
-		return ajax.post("/api/users", {
-			login: this.state.login,
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
-			email: this.state.email
+		return ajax.post("/api/account/users", {
+			Login: this.state.login,
+			FirstName: this.state.firstName,
+			LastName: this.state.lastName,
+			Email: this.state.email
 		});
 	}
 
@@ -110,7 +112,7 @@ export default class UserAddContainer extends StateComponent<
 							<InputComponent key={f.name} {...f} />
 						))}
 						<HorizontalLayout>
-							<ButtonComponent label="Save" click={this.addUser.bind(this)} />
+							<ButtonComponent label="Save" />
 							<AnchorComponent href="/users">{"Cancel"}</AnchorComponent>
 						</HorizontalLayout>
 					</FormComponent>

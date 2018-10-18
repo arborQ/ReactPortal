@@ -1,10 +1,11 @@
 declare namespace Containers.Users {
     export interface IUserStoreState {
         users: IUser[];
+        selectedIds: number[];
     }
 
     export interface IUser {
-        _id?: number;
+        id?: number;
         isActive: boolean;
         login: string;
         firstName: string;

@@ -33,7 +33,6 @@ export default abstract class StateComponent<P, S> extends React.Component<
 	}
 
 	stateWillChange(newState: S): boolean {
-    console.log(newState);
 		return JSON.stringify(this.state) !== JSON.stringify(newState);
 	}
 
