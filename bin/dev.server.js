@@ -27,5 +27,7 @@ var server = new webpackDevServer(compiler, {
     "/api": proxy
   }
 });
-console.log("Webpack dev server listen: 8080");
+
 server.listen(8080);
+
+console.log("Webpack dev server listen: http://localhost:8080");
